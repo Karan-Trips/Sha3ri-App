@@ -119,10 +119,16 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildStatColumn(context, '3.2k', 'Following'),
-          _buildStatColumn(context, '2.5k', 'Followers'),
-          _buildStatColumn(context, '2.5k', 'Likes'),
-          _buildStatColumn(context, '100', 'Posts'),
+          GestureDetector(
+              onTap: () {},
+              child: _buildStatColumn(context, '3.2k', 'Following')),
+          GestureDetector(
+              onTap: () {},
+              child: _buildStatColumn(context, '2.5k', 'Followers')),
+          GestureDetector(
+              onTap: () {}, child: _buildStatColumn(context, '2.5k', 'Likes')),
+          GestureDetector(
+              onTap: () {}, child: _buildStatColumn(context, '100', 'Posts')),
         ],
       ),
     );
@@ -160,7 +166,10 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
         GestureDetector(
             onTap: () {
               showModalBottomSheet(
-                  context: context, builder: (context) => Column(children: [],));
+                  context: context,
+                  builder: (context) => Column(
+                        children: [],
+                      ));
             },
             child: Custome_Buttons(image: Assets.gift, title: 'My Gift')),
       ],
@@ -168,39 +177,108 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
   }
 
   Widget _buildPostsView(BuildContext context) {
-    final darMode = Theme.of(context).brightness == Brightness.dark;
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              Assets.grid,
-              height: 24.h,
-              width: 24.w,
-            ).wrapPaddingRight(5.w),
-            Text('Post',
-                style: w600_16.copyWith(
-                    fontSize: 14.sp,
-                    color: darMode ? AppColor.white : AppColor.black,
-                    fontWeight: FontWeight.w500))
-          ],
-        ).wrapPaddingBottom(13.h),
-        Divider(
-          height: 2,
-          color: AppColor.blue,
-        ),
-        GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: 12,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisExtent: 140.h,
-                crossAxisCount: 3,
-                mainAxisSpacing: 4.0,
-                crossAxisSpacing: 4),
-            itemBuilder: (context, index) => Container(
-                  child: Row(
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    return DefaultTabController(
+      length: 2,
+      child: Column(
+        children: [
+          TabBar(
+            indicatorColor: AppColor.blue,
+            automaticIndicatorColorAdjustment: true,
+            enableFeedback: true,
+            indicatorWeight: 2,
+            dividerHeight: 0,
+            labelPadding: EdgeInsets.only(bottom: 11.h),
+            padding: EdgeInsets.only(bottom: 15.h),
+            tabs: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(Assets.grid, height: 24.h, width: 24.w)
+                      .wrapPaddingRight(5.w),
+                  Text("Post")
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    Assets.heart,
+                    height: 24.h,
+                    width: 24.w,
+                    color: isDarkMode ? AppColor.white : AppColor.black,
+                  ).wrapPaddingRight(5.w),
+                  Text("Favorite")
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: TabBarView(
+              children: [
+                // Post Tab View
+                _buildPost(),
+                // Favorite Tab View
+                _buildFavorite(),
+              ],
+            ),
+          ),
+        ],
+      ).wrapPaddingHorizontal(16.w),
+    );
+  }
+
+  GridView _buildPost() {
+    return GridView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: 12,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisExtent: 140.h,
+            crossAxisCount: 3,
+            mainAxisSpacing: 4.0,
+            crossAxisSpacing: 4),
+        itemBuilder: (context, index) => Container(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Image.asset(Assets.like2, height: 15.h, width: 15.w)
+                      .wrapPaddingRight(2.w),
+                  Text('12.5k',
+                      style: w500_14.copyWith(
+                          fontSize: 12.sp, color: AppColor.white))
+                ],
+              ).wrapPaddingOnly(bottom: 10.h, left: 11.w),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4.r),
+                  image: DecorationImage(
+                      fit: BoxFit.cover, image: AssetImage(Assets.gitar))),
+            ));
+  }
+
+  GridView _buildFavorite() {
+    return GridView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: 6,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisExtent: 140.h,
+            crossAxisCount: 3,
+            mainAxisSpacing: 4.0,
+            crossAxisSpacing: 4),
+        itemBuilder: (context, index) => Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Image.asset(Assets.heart_liked, height: 15.h, width: 15.w)
+                          .wrapPaddingRight(15.w),
+                    ],
+                  ).wrapPaddingOnly(top: 10.h, left: 11.w),
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Image.asset(Assets.like2, height: 15.h, width: 15.w)
@@ -210,13 +288,13 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
                               fontSize: 12.sp, color: AppColor.white))
                     ],
                   ).wrapPaddingOnly(bottom: 10.h, left: 11.w),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.r),
-                      image: DecorationImage(
-                          fit: BoxFit.cover, image: AssetImage(Assets.gitar))),
-                )).wrapPaddingBottom(10.h),
-      ],
-    ).wrapPaddingHorizontal(16.w);
+                ],
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4.r),
+                  image: DecorationImage(
+                      fit: BoxFit.cover, image: AssetImage(Assets.gitar))),
+            ));
   }
 }
 
