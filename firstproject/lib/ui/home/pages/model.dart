@@ -50,7 +50,7 @@ class ChewiePlayer extends StatefulWidget {
 class _ChewiePlayerState extends State<ChewiePlayer> {
   late VideoPlayerController _videoPlayerController;
   ChewieController? _chewieController;
-  bool isLiked = false;
+  bool isLiked = true;
   bool isloved = false;
 
   @override

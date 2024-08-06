@@ -6,10 +6,7 @@ import '../../../values/export.dart';
 import 'report_sheet.dart';
 
 class OptionSheet extends StatelessWidget {
-  const OptionSheet({
-    super.key,
-    required this.username,
-  });
+  const OptionSheet({super.key, required this.username});
 
   final String username;
 

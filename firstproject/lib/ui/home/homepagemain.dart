@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_demo_structure/router/app_router.dart';
 import 'package:flutter_demo_structure/ui/home/pages/notification.dart';
+import 'package:flutter_demo_structure/ui/userProfile/pages/profile_setting.dart';
 import 'package:flutter_demo_structure/values/export.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
 import 'package:flutter_demo_structure/widget/app_image.dart';
@@ -328,9 +329,7 @@ class _HomePageMainState extends State<HomePageMain>
                 child: Text(""),
               ),
               NotificationPage(),
-              Center(
-                child: Text("Profile"),
-              ),
+              ProfileSettingPage()
             ],
           ),
         ),
