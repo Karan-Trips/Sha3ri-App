@@ -7,6 +7,7 @@ class AppButton extends StatelessWidget {
   final VoidCallback callback;
   final double? elevation;
   final double? height;
+  final double? width;
   final double? radius;
   final double? padding;
   final bool buttonColor;
@@ -17,6 +18,7 @@ class AppButton extends StatelessWidget {
     super.key,
     double this.elevation = 0.0,
     this.height,
+    this.width,
     this.radius,
     this.padding,
     this.buttonColor = false,
@@ -25,7 +27,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: width ?? double.infinity,
       height: 55.h,
       child: MaterialButton(
         elevation: elevation,

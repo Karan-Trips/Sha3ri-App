@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_structure/core/locator/locator.dart';
+import 'package:flutter_demo_structure/router/app_router.dart';
 import 'package:flutter_demo_structure/values/export.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -120,10 +122,14 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
-              onTap: () {},
+              onTap: () {
+                locator<AppRouter>().push(FollowerRoute(types: 0));
+              },
               child: _buildStatColumn(context, '3.2k', 'Following')),
           GestureDetector(
-              onTap: () {},
+              onTap: () {
+                locator<AppRouter>().push(FollowerRoute(types: 1));
+              },
               child: _buildStatColumn(context, '2.5k', 'Followers')),
           GestureDetector(
               onTap: () {}, child: _buildStatColumn(context, '2.5k', 'Likes')),

@@ -103,14 +103,14 @@ class ProfilePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Stephanie Magnus',
+                username,
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
-                '@$username',
+                "@rose",
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium

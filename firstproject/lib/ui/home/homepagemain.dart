@@ -148,190 +148,185 @@ class _HomePageMainState extends State<HomePageMain>
             false;
         return shouldPop;
       },
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          bottomNavigationBar: Observer(
-              builder: (_) => Stack(children: [
-                    BottomNavigationBar(
-                        type: BottomNavigationBarType.fixed,
-                        backgroundColor: Colors.white,
-                        selectedItemColor: Colors.blue,
-                        elevation: 0,
-                        currentIndex: _selectedIndex,
-                        unselectedItemColor: Colors.black.withOpacity(.5),
-                        showSelectedLabels: false,
-                        showUnselectedLabels: false,
-                        onTap: (index) {
-                          setState(() {
-                            _selectedIndex = index;
-                          });
-                          _pageController.jumpToPage(index);
-                        },
-                        items: [
-                          BottomNavigationBarItem(
-                              icon: Icon(FontAwesomeIcons.house),
-                              label: 'Home'),
-                          BottomNavigationBarItem(
-                              activeIcon:
-                                  Icon(FontAwesomeIcons.solidCommentDots),
-                              icon: Icon(FontAwesomeIcons.commentDots),
-                              label: 'Comments'),
-                          BottomNavigationBarItem(
-                              icon: GestureDetector(
-                                onTap: () =>
-                                    locator<AppRouter>().push(CameraRoute()),
-                                child: Container(
-                                    width: 48.h,
-                                    height: 48.w,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.blue),
-                                    child: Icon(FontAwesomeIcons.plus,
-                                        size: 24.w, color: Colors.white)),
-                              ),
-                              label: ''),
-                          BottomNavigationBarItem(
-                              activeIcon: Icon(FontAwesomeIcons.solidBell),
-                              icon: Icon(FontAwesomeIcons.bell),
-                              label: 'Notifications'),
-                          BottomNavigationBarItem(
-                              activeIcon:
-                                  Icon(FontAwesomeIcons.solidCircleUser),
-                              icon: Icon(FontAwesomeIcons.circleUser),
-                              label: 'Profile')
-                        ])
-                  ])),
-          extendBodyBehindAppBar: _extendBodyBehindAppBar,
-          appBar: _selectedIndex == 0
-              ? AppBar(
-                  flexibleSpace: _tabController.index == 1
-                      ? Container(
-                          decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                              Colors.black,
-                              Color.fromRGBO(255, 255, 255, 0.657892)
-                            ])))
-                      : null,
-                  elevation: 0,
-                  scrolledUnderElevation: 0,
-                  toolbarHeight: 60.h,
-                  backgroundColor: AppColor.transparent,
-                  bottom: PreferredSize(
-                    preferredSize: Size.fromHeight(40.h),
-                    child: Container(
-                      height: 32.h,
-                      decoration: BoxDecoration(
-                        color: isDarkMode
-                            ? Colors.white.withOpacity(0.33)
-                            : AppColor.black.withOpacity(0.33),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        bottomNavigationBar: Observer(
+            builder: (_) => Stack(children: [
+                  BottomNavigationBar(
+                      type: BottomNavigationBarType.fixed,
+                      backgroundColor: Colors.white,
+                      selectedItemColor: Colors.blue,
+                      elevation: 0,
+                      currentIndex: _selectedIndex,
+                      unselectedItemColor: Colors.black.withOpacity(.5),
+                      showSelectedLabels: false,
+                      showUnselectedLabels: false,
+                      onTap: (index) {
+                        setState(() {
+                          _selectedIndex = index;
+                        });
+                        _pageController.jumpToPage(index);
+                      },
+                      items: [
+                        BottomNavigationBarItem(
+                            icon: Icon(FontAwesomeIcons.house), label: 'Home'),
+                        BottomNavigationBarItem(
+                            activeIcon: Icon(FontAwesomeIcons.solidCommentDots),
+                            icon: Icon(FontAwesomeIcons.commentDots),
+                            label: 'Comments'),
+                        BottomNavigationBarItem(
+                            icon: GestureDetector(
+                              onTap: () =>
+                                  locator<AppRouter>().push(CameraRoute()),
+                              child: Container(
+                                  width: 48.h,
+                                  height: 48.w,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.blue),
+                                  child: Icon(FontAwesomeIcons.plus,
+                                      size: 24.w, color: Colors.white)),
+                            ),
+                            label: ''),
+                        BottomNavigationBarItem(
+                            activeIcon: Icon(FontAwesomeIcons.solidBell),
+                            icon: Icon(FontAwesomeIcons.bell),
+                            label: 'Notifications'),
+                        BottomNavigationBarItem(
+                            activeIcon: Icon(FontAwesomeIcons.solidCircleUser),
+                            icon: Icon(FontAwesomeIcons.circleUser),
+                            label: 'Profile')
+                      ])
+                ])),
+        extendBodyBehindAppBar: _extendBodyBehindAppBar,
+        appBar: _selectedIndex == 0
+            ? AppBar(
+                flexibleSpace: _tabController.index == 1
+                    ? Container(
+                        decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                            Colors.black,
+                            Color.fromRGBO(255, 255, 255, 0.657892)
+                          ])))
+                    : null,
+                elevation: 0,
+                scrolledUnderElevation: 0,
+                toolbarHeight: 60.h,
+                backgroundColor: AppColor.transparent,
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(40.h),
+                  child: Container(
+                    height: 32.h,
+                    decoration: BoxDecoration(
+                      color: isDarkMode
+                          ? Colors.white.withOpacity(0.33)
+                          : AppColor.black.withOpacity(0.33),
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: TabBar(
+                      controller: _tabController,
+                      automaticIndicatorColorAdjustment: true,
+                      labelPadding: EdgeInsets.zero,
+                      labelColor: Colors.white,
+                      dividerHeight: 0,
+                      onTap: (index) {},
+                      enableFeedback: true,
+                      labelStyle: w400_16.copyWith(fontSize: 12.spMin),
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      indicator: BoxDecoration(
+                        color: AppColor.blue,
                         borderRadius: BorderRadius.circular(10.r),
                       ),
-                      child: TabBar(
-                        controller: _tabController,
-                        automaticIndicatorColorAdjustment: true,
-                        labelPadding: EdgeInsets.zero,
-                        labelColor: Colors.white,
-                        dividerHeight: 0,
-                        onTap: (index) {},
-                        enableFeedback: true,
-                        labelStyle: w400_16.copyWith(fontSize: 12.spMin),
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        indicator: BoxDecoration(
-                          color: AppColor.blue,
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        unselectedLabelColor: Colors.white,
-                        tabs: [
-                          Tab(text: 'Feed'),
-                          Tab(text: 'Top Poets'),
-                          Tab(text: 'Latest'),
-                          Tab(text: 'Most Liked')
-                        ],
-                      ).wrapPaddingAll(3),
-                    ).wrapPaddingHorizontal(45.w),
-                  ),
-                  actions: [
-                    GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                            context: context,
-                            showDragHandle: true,
-                            isDismissible: true,
-                            isScrollControlled: true,
-                            builder: (context) => GiftPage());
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(5.r),
-                        child: Lottie.asset('assets/icons/gifts.json'),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: AppColor.white),
-                      ).wrapPaddingRight(10.w),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        locator<AppRouter>().push(GoLiveRoute());
-                      },
-                      child: Container(
-                              child: AppImage(
-                                  assets: Assets.radar,
-                                  height: 25.h,
-                                  width: 25.w),
-                              padding: EdgeInsets.all(5.r),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle, color: AppColor.red))
-                          .wrapPaddingRight(16.w),
-                    ),
-                  ],
-                  leading: Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image:
-                            DecorationImage(image: AssetImage(Assets.profile))),
-                  ).wrapPaddingLeft(16.w),
-                  title: GestureDetector(
-                    onTap: () => locator<AppRouter>().push(SearchRoute()),
+                      unselectedLabelColor: Colors.white,
+                      tabs: [
+                        Tab(text: 'Feed'),
+                        Tab(text: 'Top Poets'),
+                        Tab(text: 'Latest'),
+                        Tab(text: 'Most Liked')
+                      ],
+                    ).wrapPaddingAll(3),
+                  ).wrapPaddingHorizontal(45.w),
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                          context: context,
+                          showDragHandle: true,
+                          isDismissible: true,
+                          isScrollControlled: true,
+                          builder: (context) => GiftPage());
+                    },
                     child: Container(
+                      padding: EdgeInsets.all(5.r),
+                      child: Lottie.asset('assets/icons/gifts.json'),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50.r),
-                          color: AppColor.white),
-                      child: Row(
-                        children: [
-                          Icon(Icons.search, color: AppColor.lightgrey)
-                              .wrapPaddingRight(7.w),
-                          Text(
-                            "Search",
-                            style: w400_16.copyWith(
-                                fontSize: 14.sp, fontFamily: 'figtree_regular'),
-                          )
-                        ],
-                      ).wrapPaddingSymmetric(horizontal: 15.w, vertical: 10.h),
-                    ),
+                          shape: BoxShape.circle, color: AppColor.white),
+                    ).wrapPaddingRight(10.w),
                   ),
-                )
-              : null,
-          body: PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            children: [
-              homePage(false),
-              Center(
-                child: Text("Comments"),
-              ),
-              Center(
-                child: Text(""),
-              ),
-              NotificationPage(),
-              ProfileSettingPage()
-            ],
-          ),
+                  GestureDetector(
+                    onTap: () {
+                      locator<AppRouter>().push(GoLiveRoute());
+                    },
+                    child: Container(
+                            child: AppImage(
+                                assets: Assets.radar,
+                                height: 25.h,
+                                width: 25.w),
+                            padding: EdgeInsets.all(5.r),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: AppColor.red))
+                        .wrapPaddingRight(16.w),
+                  ),
+                ],
+                leading: Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image:
+                          DecorationImage(image: AssetImage(Assets.profile))),
+                ).wrapPaddingLeft(16.w),
+                title: GestureDetector(
+                  onTap: () => locator<AppRouter>().push(SearchRoute()),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50.r),
+                        color: AppColor.white),
+                    child: Row(
+                      children: [
+                        Icon(Icons.search, color: AppColor.lightgrey)
+                            .wrapPaddingRight(7.w),
+                        Text(
+                          "Search",
+                          style: w400_16.copyWith(
+                              fontSize: 14.sp, fontFamily: 'figtree_regular'),
+                        )
+                      ],
+                    ).wrapPaddingSymmetric(horizontal: 15.w, vertical: 10.h),
+                  ),
+                ),
+              )
+            : null,
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          children: [
+            homePage(false),
+            Center(
+              child: Text("Comments"),
+            ),
+            Center(
+              child: Text(""),
+            ),
+            NotificationPage(),
+            ProfileSettingPage()
+          ],
         ),
       ),
     );

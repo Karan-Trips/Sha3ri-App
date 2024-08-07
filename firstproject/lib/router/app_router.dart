@@ -17,6 +17,7 @@ import '../ui/userProfile/createPost/create_post.dart';
 import '../ui/userProfile/createPost/live_recording.dart';
 import '../ui/userProfile/createPost/post_edit.dart';
 import '../ui/userProfile/createPost/post_upload.dart';
+import '../ui/userProfile/pages/follower.dart';
 import '../ui/userProfile/user_profile.dart';
 
 part 'app_router.gr.dart';
@@ -44,6 +45,7 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: GoLiveRoute.page),
     AutoRoute(page: SearchRoute.page),
     AutoRoute(page: NotificationRoute.page),
+    AutoRoute(page: FollowerRoute.page),
     CustomRoute(
         initial: true,
         page: HomeRouteMain.page,
