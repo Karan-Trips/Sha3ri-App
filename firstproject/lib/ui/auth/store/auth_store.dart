@@ -1,17 +1,14 @@
-
 import 'package:flutter_demo_structure/core/api/base_response/base_response.dart';
 import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mobx/mobx.dart';
 
-
 part 'auth_store.g.dart';
 
 class AuthStore = _AuthStoreBase with _$AuthStore;
 
 abstract class _AuthStoreBase with Store {
-
   @observable
   BaseResponse? logoutResponse;
 
@@ -19,24 +16,53 @@ abstract class _AuthStoreBase with Store {
   String? errorMessage;
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  @observable
+  String selectedLanguage = 'en';
 
   _AuthStoreBase();
 
- @observable
+  @observable
   int currentIndex = 0;
 
   @observable
   int currentIndex2 = 0;
+  @observable
+  bool isCurrentPasswordVisible = false;
+
+  @observable
+  bool isNewPasswordVisible = false;
+
+  @observable
+  bool isConfirmPasswordVisible = false;
 
   @observable
   ObservableSet<int> likedPoets = ObservableSet<int>();
 
   @observable
   ObservableSet<int> heartedPoets = ObservableSet<int>();
+  @action
+  void toggleCurrentPasswordVisibility() {
+    isCurrentPasswordVisible = !isCurrentPasswordVisible;
+  }
+
+  @action
+  void toggleNewPasswordVisibility() {
+    isNewPasswordVisible = !isNewPasswordVisible;
+  }
+
+  @action
+  void toggleConfirmPasswordVisibility() {
+    isConfirmPasswordVisible = !isConfirmPasswordVisible;
+  }
 
   @action
   void onItemTapped(int index) {
     currentIndex = index;
+  }
+
+  @action
+  void changeLanguage(String language) {
+    selectedLanguage = language;
   }
 
   @action
@@ -61,7 +87,6 @@ abstract class _AuthStoreBase with Store {
       heartedPoets.add(index);
     }
   }
- 
 }
 
 final authStore = locator<AuthStore>();

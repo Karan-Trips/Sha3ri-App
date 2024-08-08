@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_demo_structure/generated/assets.dart';
+import 'package:flutter_demo_structure/router/app_router.dart';
 import 'package:flutter_demo_structure/values/export.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,79 +52,85 @@ class _SettingPageState extends State<SettingPage> {
               children: [
                 Row(
                   children: [
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 5.h, horizontal: 15.w),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r),
-                        border: Border.all(
-                          width: 1.w,
-                          color: AppColor.lightgrey,
+                    GestureDetector(
+                      onTap: () => locator<AppRouter>().push(MyGiftRoute()),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 5.h, horizontal: 15.w),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r),
+                          border: Border.all(
+                            width: 1.w,
+                            color: AppColor.lightgrey,
+                          ),
                         ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(Assets.gift, height: 48.h, width: 48.w)
-                              .wrapPaddingHorizontal(5.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "40",
-                                style: w700_22.copyWith(
-                                    color: isDarkMode
-                                        ? AppColor.white
-                                        : AppColor.black),
-                              ),
-                              Text(
-                                "My Gifts",
-                                style: w400_14.copyWith(
-                                    fontSize: 12.sp,
-                                    color: isDarkMode
-                                        ? AppColor.white
-                                        : AppColor.black),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ).wrapPaddingRight(15.w),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 5.h),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r),
-                        border: Border.all(
-                          width: 1.w,
-                          color: AppColor.lightgrey,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(Assets.gift, height: 48.h, width: 48.w)
+                                .wrapPaddingHorizontal(5.w),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "40",
+                                  style: w700_22.copyWith(
+                                      color: isDarkMode
+                                          ? AppColor.white
+                                          : AppColor.black),
+                                ),
+                                Text(
+                                  "My Gifts",
+                                  style: w400_14.copyWith(
+                                      fontSize: 12.sp,
+                                      color: isDarkMode
+                                          ? AppColor.white
+                                          : AppColor.black),
+                                )
+                              ],
+                            )
+                          ],
                         ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(Assets.coin, height: 48.h, width: 48.w)
-                              .wrapPaddingHorizontal(5.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "100",
-                                style: w700_22.copyWith(
-                                    color: isDarkMode
-                                        ? AppColor.white
-                                        : AppColor.black),
-                              ),
-                              Text(
-                                "Total Tokens",
-                                style: w400_14.copyWith(
-                                    fontSize: 12.sp,
-                                    color: isDarkMode
-                                        ? AppColor.white
-                                        : AppColor.black),
-                              ).wrapPaddingRight(15.w)
-                            ],
-                          )
-                        ],
+                      ).wrapPaddingRight(15.w),
+                    ),
+                    GestureDetector(
+                      onTap: () => locator<AppRouter>().push(TokensRoute()),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 5.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r),
+                          border: Border.all(
+                            width: 1.w,
+                            color: AppColor.lightgrey,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(Assets.coin, height: 48.h, width: 48.w)
+                                .wrapPaddingHorizontal(5.w),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "100",
+                                  style: w700_22.copyWith(
+                                      color: isDarkMode
+                                          ? AppColor.white
+                                          : AppColor.black),
+                                ),
+                                Text(
+                                  "Total Tokens",
+                                  style: w400_14.copyWith(
+                                      fontSize: 12.sp,
+                                      color: isDarkMode
+                                          ? AppColor.white
+                                          : AppColor.black),
+                                ).wrapPaddingRight(15.w)
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -186,6 +194,11 @@ class _SettingPageState extends State<SettingPage> {
                       ListTile(
                         onTap: () {
                           print(index);
+                          if (index == 1) {
+                            locator<AppRouter>().push(ChangePasswordRoute());
+                          } else if (index == 2) {
+                            locator<AppRouter>().push(ChangeLanguageRoute());
+                          }
                         },
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -360,7 +373,7 @@ class _SettingPageState extends State<SettingPage> {
           const Spacer(),
           sufixIcon && backgroundColor != AppColor.blue
               ? Switch(
-                  inactiveTrackColor: AppColor.lightgrey,
+                  inactiveTrackColor: AppColor.primaryColor,
                   activeColor: key == 'darkMode'
                       ? AppColor.lightgrey
                       : AppColor.lightgrey,

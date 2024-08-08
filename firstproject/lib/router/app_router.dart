@@ -4,8 +4,11 @@ import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_demo_structure/ui/home/homepagemain.dart';
 import 'package:flutter_demo_structure/ui/home/pages/search.dart';
 import 'package:flutter_demo_structure/ui/userProfile/pages/go_live.dart';
+import 'package:flutter_demo_structure/ui/userProfile/pages/my_gifts.dart';
 import 'package:flutter_demo_structure/ui/welcome_page/welcome_page.dart';
 
+import '../ui/auth/login/ui/change_lanuage.dart';
+import '../ui/auth/login/ui/forget_Password/change_password.dart';
 import '../ui/auth/login/ui/forget_Password/reset_pass.dart';
 import '../ui/auth/login/ui/forget_Password/reset_password.dart';
 import '../ui/auth/sign_up/pages/profile_info.dart';
@@ -19,6 +22,7 @@ import '../ui/userProfile/createPost/post_edit.dart';
 import '../ui/userProfile/createPost/post_upload.dart';
 import '../ui/userProfile/pages/follower.dart';
 import '../ui/userProfile/pages/setting.dart';
+import '../ui/userProfile/pages/tokens.dart';
 import '../ui/userProfile/user_profile.dart';
 
 part 'app_router.gr.dart';
@@ -38,6 +42,8 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: ResetPasswordScreenRoute.page),
     AutoRoute(page: ProfileInfoRoute.page),
     AutoRoute(page: ProfileTypeRoute.page),
+    AutoRoute(page: ChangePasswordRoute.page),
+    AutoRoute(page: ChangeLanguageRoute.page),
     AutoRoute(page: ProfileRoute.page),
     AutoRoute(page: CameraRoute.page),
     AutoRoute(page: PostEditRoute.page),
@@ -48,6 +54,8 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: NotificationRoute.page),
     AutoRoute(page: FollowerRoute.page),
     AutoRoute(page: SettingRoute.page),
+    AutoRoute(page: MyGiftRoute.page),
+    AutoRoute(page: TokensRoute.page),
     CustomRoute(
         initial: true,
         page: HomeRouteMain.page,
