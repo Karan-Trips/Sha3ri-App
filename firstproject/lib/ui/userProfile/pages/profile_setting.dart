@@ -23,25 +23,31 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
       appBar: AppBar(
           centerTitle: false,
           actions: [
-            Badge(
-              backgroundColor: AppColor.blue,
+            GestureDetector(
+              onTap: () {},
+              child: Badge(
+                backgroundColor: AppColor.blue,
+                child: Image.asset(
+                  Assets.frdreq,
+                  height: 20.h,
+                  width: 20.w,
+                  color: isDarkMode ? AppColor.white : AppColor.black,
+                ),
+                label: Text(
+                  "3",
+                  style: TextStyle(color: AppColor.white),
+                ),
+              ).wrapPaddingRight(18.w),
+            ),
+            GestureDetector(
+              onTap: () => locator<AppRouter>().push(SettingRoute()),
               child: Image.asset(
-                Assets.frdreq,
+                Assets.setting,
                 height: 20.h,
                 width: 20.w,
                 color: isDarkMode ? AppColor.white : AppColor.black,
-              ),
-              label: Text(
-                "3",
-                style: TextStyle(color: AppColor.white),
-              ),
-            ).wrapPaddingRight(18.w),
-            Image.asset(
-              Assets.setting,
-              height: 20.h,
-              width: 20.w,
-              color: isDarkMode ? AppColor.white : AppColor.black,
-            ).wrapPaddingRight(15.w)
+              ).wrapPaddingRight(15.w),
+            )
           ],
           title: Text(
             "Account",

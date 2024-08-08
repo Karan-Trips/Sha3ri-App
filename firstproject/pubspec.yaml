@@ -110,6 +110,7 @@ dependencies:
   readmore: ^3.0.0
   camerawesome: ^2.0.1
   open_file: ^3.3.2
+  flutter_intl: ^0.0.1
 
 dev_dependencies:
   build_runner: ^2.4.11
@@ -173,7 +174,6 @@ flutter:
     - family: figtree_light
       fonts:
         - asset: assets/fonts/Figtree-Light.ttf
-
 
 flutter_intl:
   enabled: true

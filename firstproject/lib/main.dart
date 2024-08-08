@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -40,11 +38,16 @@ Future<void> main() async {
   runApp(MyApp(appRouter: locator<AppRouter>()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   final AppRouter appRouter;
 
   const MyApp({required this.appRouter, super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -57,8 +60,8 @@ class MyApp extends StatelessWidget {
             darkTheme: darkTheme,
             themeMode: themeMode,
             debugShowCheckedModeBanner: false,
-            routerDelegate: appRouter.delegate(),
-            routeInformationParser: appRouter.defaultRouteParser(),
+            routerDelegate: widget.appRouter.delegate(),
+            routeInformationParser: widget.appRouter.defaultRouteParser(),
             onGenerateTitle: (context) => S.of(context).applicationTitle,
             localizationsDelegates: const [S.delegate],
             supportedLocales: S.delegate.supportedLocales,
@@ -69,10 +72,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-ValueNotifier<ThemeMode> themeNotifier =
-    ValueNotifier<ThemeMode>(ThemeMode.system);
+ValueNotifier<ThemeMode> themeNotifier = ValueNotifier<ThemeMode>(ThemeMode.system);
 
 void switchThemeMode() {
-  themeNotifier.value =
-      themeNotifier.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+  themeNotifier.value = themeNotifier.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
 }
