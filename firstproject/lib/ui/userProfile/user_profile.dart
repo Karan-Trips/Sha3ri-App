@@ -318,11 +318,12 @@ class ProfilePage extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             itemCount: 12,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisExtent: 140.h,
+                mainAxisExtent: 130.h,
                 crossAxisCount: 3,
-                mainAxisSpacing: 4.0,
-                crossAxisSpacing: 4),
+                mainAxisSpacing: 5.w,
+                crossAxisSpacing: 5.h),
             itemBuilder: (context, index) => Container(
+                  width: 118.w,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [

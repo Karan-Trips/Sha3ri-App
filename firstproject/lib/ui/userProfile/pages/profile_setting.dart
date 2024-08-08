@@ -29,31 +29,25 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
                 backgroundColor: AppColor.blue,
                 child: Image.asset(
                   Assets.frdreq,
-                  height: 20.h,
-                  width: 20.w,
+                  height: 24.h,
+                  width: 24.w,
                   color: isDarkMode ? AppColor.white : AppColor.black,
                 ),
-                label: Text(
-                  "3",
-                  style: TextStyle(color: AppColor.white),
-                ),
+                label: Text("3", style: TextStyle(color: AppColor.white)),
               ).wrapPaddingRight(18.w),
             ),
             GestureDetector(
               onTap: () => locator<AppRouter>().push(SettingRoute()),
-              child: Image.asset(
-                Assets.setting,
-                height: 20.h,
-                width: 20.w,
-                color: isDarkMode ? AppColor.white : AppColor.black,
-              ).wrapPaddingRight(15.w),
+              child: Image.asset(Assets.setting,
+                      height: 24.h,
+                      width: 24.w,
+                      color: isDarkMode ? AppColor.white : AppColor.black)
+                  .wrapPaddingRight(15.w),
             )
           ],
-          title: Text(
-            "Account",
-            style: w700_22.copyWith(
-                color: isDarkMode ? AppColor.white : AppColor.black),
-          )),
+          title: Text("Account",
+              style: w700_22.copyWith(
+                  color: isDarkMode ? AppColor.white : AppColor.black))),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -247,11 +241,12 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
         physics: NeverScrollableScrollPhysics(),
         itemCount: 12,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisExtent: 140.h,
+            mainAxisExtent: 130.h,
             crossAxisCount: 3,
-            mainAxisSpacing: 4.0,
-            crossAxisSpacing: 4),
+            mainAxisSpacing: 4.w,
+            crossAxisSpacing: 4.w),
         itemBuilder: (context, index) => Container(
+              width: 118.w,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
