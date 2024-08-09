@@ -20,36 +20,35 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      appBar: AppBar(
-          centerTitle: false,
-          actions: [
-            GestureDetector(
-              onTap: () {},
-              child: Badge(
-                backgroundColor: AppColor.blue,
-                child: Image.asset(
-                  Assets.frdreq,
-                  height: 24.h,
-                  width: 24.w,
-                  color: isDarkMode ? AppColor.white : AppColor.black,
-                ),
-                label: Text("3", style: TextStyle(color: AppColor.white)),
-              ).wrapPaddingRight(18.w),
-            ),
-            GestureDetector(
-              onTap: () => locator<AppRouter>().push(SettingRoute()),
-              child: Image.asset(Assets.setting,
-                      height: 24.h,
-                      width: 24.w,
-                      color: isDarkMode ? AppColor.white : AppColor.black)
-                  .wrapPaddingRight(15.w),
-            )
-          ],
-          title: Text("Account",
-              style: w700_22.copyWith(
-                  color: isDarkMode ? AppColor.white : AppColor.black))),
-      body: SingleChildScrollView(
-        child: Column(
+        appBar: AppBar(
+            centerTitle: false,
+            actions: [
+              GestureDetector(
+                onTap: () {},
+                child: Badge(
+                  backgroundColor: AppColor.blue,
+                  child: Image.asset(
+                    Assets.frdreq,
+                    height: 24.h,
+                    width: 24.w,
+                    color: isDarkMode ? AppColor.white : AppColor.black,
+                  ),
+                  label: Text("3", style: TextStyle(color: AppColor.white)),
+                ).wrapPaddingRight(18.w),
+              ),
+              GestureDetector(
+                  onTap: () => locator<AppRouter>().push(SettingRoute()),
+                  child: Image.asset(Assets.setting,
+                          height: 24.h,
+                          width: 24.w,
+                          color: isDarkMode ? AppColor.white : AppColor.black)
+                      .wrapPaddingRight(15.w))
+            ],
+            title: Text("Account",
+                style: w700_22.copyWith(
+                    color: isDarkMode ? AppColor.white : AppColor.black))),
+        body: SingleChildScrollView(
+            child: Column(
           children: [
             19.verticalSpace,
             _buildProfileHeader(context),
@@ -57,45 +56,30 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
             _buildBio(context),
             _buildFollowAndMessageButtons(context, false)
                 .wrapPaddingBottom(16.h),
-            _buildPostsView(context),
+            _buildPostsView(context)
           ],
-        ),
-      ),
-    );
+        )));
   }
 
   Widget _buildProfileHeader(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 41.r,
-            backgroundImage: AssetImage(Assets.gitar),
-          ),
+        padding: const EdgeInsets.all(16.0),
+        child: Row(children: [
+          CircleAvatar(radius: 41.r, backgroundImage: AssetImage(Assets.gitar)),
           SizedBox(width: 15.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Barbara Gills',
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text('Barbara Gills',
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '@barbie',
+                    ?.copyWith(fontWeight: FontWeight.bold)),
+            Text('@barbie',
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium
-                    ?.copyWith(color: AppColor.blue),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+                    ?.copyWith(color: AppColor.blue))
+          ])
+        ]));
   }
 
   Widget _buildBio(BuildContext context) {
@@ -141,98 +125,80 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
   }
 
   Widget _buildStatColumn(BuildContext context, String value, String label) {
-    return Column(
-      children: [
-        Text(
-          value,
+    return Column(children: [
+      Text(value,
           style: Theme.of(context)
               .textTheme
               .titleLarge
-              ?.copyWith(fontWeight: FontWeight.bold),
-        ),
-        Text(
-          label,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-      ],
-    );
+              ?.copyWith(fontWeight: FontWeight.bold)),
+      Text(
+        label,
+        style: Theme.of(context).textTheme.bodyMedium,
+      )
+    ]);
   }
 
   Widget _buildFollowAndMessageButtons(BuildContext context, bool isPrivate) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        GestureDetector(
-            onTap: () {},
-            child: Custome_Buttons(
-                image: Assets.editIcon, title: 'Edit', bgColor: true)),
-        GestureDetector(
-            onTap: () {},
-            child: Custome_Buttons(image: Assets.coin, title: 'Token')),
-        GestureDetector(
-            onTap: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) => Column(
-                        children: [],
-                      ));
-            },
-            child: Custome_Buttons(image: Assets.gift, title: 'My Gift')),
-      ],
-    ).wrapPaddingHorizontal(16.w);
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      GestureDetector(
+          onTap: () {},
+          child: Custome_Buttons(
+              image: Assets.editIcon, title: 'Edit', bgColor: true)),
+      GestureDetector(
+          onTap: () {},
+          child: Custome_Buttons(image: Assets.coin, title: 'Token')),
+      GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (context) => Column(
+                      children: [],
+                    ));
+          },
+          child: Custome_Buttons(image: Assets.gift, title: 'My Gift'))
+    ]).wrapPaddingHorizontal(16.w);
   }
 
   Widget _buildPostsView(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return DefaultTabController(
-      length: 2,
-      child: Column(
-        children: [
+        length: 2,
+        child: Column(children: [
           TabBar(
-            indicatorColor: AppColor.blue,
-            automaticIndicatorColorAdjustment: true,
-            enableFeedback: true,
-            indicatorWeight: 2,
-            dividerHeight: 0,
-            labelPadding: EdgeInsets.only(bottom: 11.h),
-            padding: EdgeInsets.only(bottom: 15.h),
-            tabs: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(Assets.grid, height: 24.h, width: 24.w)
+              indicatorColor: AppColor.blue,
+              automaticIndicatorColorAdjustment: true,
+              enableFeedback: true,
+              indicatorWeight: 2,
+              dividerHeight: 0,
+              labelPadding: EdgeInsets.only(bottom: 11.h),
+              padding: EdgeInsets.only(bottom: 15.h),
+              tabs: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(Assets.grid, height: 24.h, width: 24.w)
+                        .wrapPaddingRight(5.w),
+                    Text("Post")
+                  ],
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Image.asset(Assets.heart,
+                          height: 24.h,
+                          width: 24.w,
+                          color: isDarkMode ? AppColor.white : AppColor.black)
                       .wrapPaddingRight(5.w),
-                  Text("Post")
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    Assets.heart,
-                    height: 24.h,
-                    width: 24.w,
-                    color: isDarkMode ? AppColor.white : AppColor.black,
-                  ).wrapPaddingRight(5.w),
                   Text("Favorite")
-                ],
-              ),
-            ],
-          ),
+                ])
+              ]),
           SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: TabBarView(
-              children: [
+              height: MediaQuery.of(context).size.height,
+              child: TabBarView(children: [
                 // Post Tab View
                 _buildPost(),
                 // Favorite Tab View
                 _buildFavorite(),
-              ],
-            ),
-          ),
-        ],
-      ).wrapPaddingHorizontal(16.w),
-    );
+              ]))
+        ]).wrapPaddingHorizontal(16.w));
   }
 
   GridView _buildPost() {
