@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_structure/core/locator/locator.dart';
+import 'package:flutter_demo_structure/ui/auth/login/widget/edit_user_profile.dart';
 import 'package:flutter_demo_structure/ui/home/homepagemain.dart';
 import 'package:flutter_demo_structure/ui/home/pages/search.dart';
 import 'package:flutter_demo_structure/ui/userProfile/pages/block_user.dart';
@@ -64,7 +65,7 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: AboutUsRoute.page),
     AutoRoute(page: ContactUsRoute.page),
     AutoRoute(page: FAQRoute.page),
-    // AutoRoute(page: GiftRoute.page),
+    AutoRoute(page: EditUserProfileRoute.page),
     CustomRoute(
         initial: true,
         page: HomeRouteMain.page,

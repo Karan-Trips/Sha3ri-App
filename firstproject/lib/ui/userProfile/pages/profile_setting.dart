@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_demo_structure/router/app_router.dart';
-import 'package:flutter_demo_structure/ui/home/pages/gift_page.dart';
 import 'package:flutter_demo_structure/values/export.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -141,7 +140,9 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
   Widget _buildFollowAndMessageButtons(BuildContext context, bool isPrivate) {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       GestureDetector(
-          onTap: () {},
+          onTap: () {
+            locator<AppRouter>().push(EditUserProfileRoute());
+          },
           child: Custome_Buttons(
               image: Assets.editIcon, title: 'Edit', bgColor: true)),
       GestureDetector(

@@ -29,6 +29,8 @@ class NotificationTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return ListTile(
+      contentPadding: EdgeInsets.zero,
+      isThreeLine: false,
       leading: CircleAvatar(
         backgroundImage: AssetImage(notification.profileImageUrl),
         radius: 25.r,
