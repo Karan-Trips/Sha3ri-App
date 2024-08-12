@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_structure/ui/auth/store/auth_store.dart';
 import 'package:flutter_demo_structure/values/export.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
+import 'package:flutter_demo_structure/widget/button_widget.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../generated/assets.dart';
@@ -42,6 +45,17 @@ class _TokensPageState extends State<TokensPage> {
         isRecived: false,
         price: '50',
         date: "20 Dec, 11:43 PM"),
+  ];
+  List<PurchaseTokenModel> tokensData = [
+    PurchaseTokenModel(image: Assets.coins2, price: '20', qty: '10'),
+    PurchaseTokenModel(image: Assets.coins1, price: '20', qty: '20'),
+    PurchaseTokenModel(image: Assets.coins3, price: '20', qty: '50'),
+    PurchaseTokenModel(image: Assets.coins4, price: '20', qty: '100'),
+    PurchaseTokenModel(image: Assets.coins1, price: '20', qty: '150'),
+    PurchaseTokenModel(image: Assets.coins1, price: '20', qty: '200'),
+    PurchaseTokenModel(image: Assets.coins3, price: '20', qty: '300'),
+    PurchaseTokenModel(image: Assets.coins2, price: '20', qty: '400'),
+    PurchaseTokenModel(image: Assets.coins4, price: '20', qty: '500'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -87,42 +101,117 @@ class _TokensPageState extends State<TokensPage> {
                 GestureDetector(
                   onTap: () {
                     showModalBottomSheet(
-                        context: context,
-                        showDragHandle: true,
-                        isScrollControlled: true,
-                        builder: (context) => Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                30.verticalSpace,
-                                Image.asset(Assets.coin,
-                                        height: 48.h, width: 48.w)
-                                    .wrapPaddingBottom(10.h),
-                                Text(
-                                  "Purchase Tokens",
-                                  softWrap: true,
-                                  style: w600_20.copyWith(
-                                      color: isDarkMode
-                                          ? AppColor.white
-                                          : Color(0xff0B1120)),
-                                ).wrapPaddingBottom(42.h),
-                                GridView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: 6,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      mainAxisSpacing: 30.w,
-                                      crossAxisSpacing: 28.h,
+                      context: context,
+                      showDragHandle: true,
+                      isScrollControlled: true,
+                      builder: (context) => Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          10.verticalSpace,
+                          Image.asset(Assets.coin, height: 48.h, width: 48.w)
+                              .wrapPaddingBottom(10.h),
+                          Text(
+                            "Purchase Tokens",
+                            softWrap: true,
+                            style: w600_20.copyWith(
+                              color: isDarkMode
+                                  ? AppColor.white
+                                  : Color(0xff0B1120),
+                            ),
+                          ).wrapPaddingBottom(35.h),
+                          GridView.builder(
+                              shrinkWrap: true,
+                              itemCount: tokensData.length,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                mainAxisSpacing: 10.w,
+                                crossAxisSpacing: 18.h,
+                              ),
+                              itemBuilder: (context, index) {
+                                final data = tokensData[index];
+                                var image = data.image;
+                                var qty = data.qty;
+                                var price = data.price;
+                                // bool isSelected =
+                                //     authStore.selectedTokens.contains(index);
+                                return Observer(builder: (_) {
+                                  bool isSelected =
+                                      authStore.selectedTokens.contains(index);
+                                  return Stack(children: [
+                                    GestureDetector(
+                                      onTap: () =>
+                                          authStore.toggleSelection(index),
+                                      child: Observer(builder: (_) {
+                                        return Container(
+                                          padding: EdgeInsets.all(13.r),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                width: .93.w,
+                                                color: isSelected
+                                                    ? AppColor.blue
+                                                    : AppColor.grey,
+                                              )),
+                                          child: Column(
+                                            children: [
+                                              Image.asset(image,
+                                                      height: 35.h, width: 65.w)
+                                                  .wrapPaddingBottom(4.h),
+                                              Text(
+                                                "$qty Token",
+                                                style: w600_16.copyWith(
+                                                    fontSize: 11.sp,
+                                                    color: isDarkMode
+                                                        ? AppColor.white
+                                                        : AppColor.black),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }),
                                     ),
-                                    itemBuilder: (context, index) {
-                                      return Image.asset(
-                                        Assets.tokens,
-                                        height: 99.h,
-                                        width: 99.w,
-                                      );
-                                    })
-                              ],
-                            ));
+                                    if (isSelected)
+                                      Align(
+                                        alignment: Alignment.topRight,
+                                        child: Image.asset(Assets.tick_mark,
+                                            height: 24.h, width: 24.w),
+                                      ),
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Image.asset(Assets.hh,
+                                          height: 21.h, width: 103.w),
+                                    ),
+                                    Positioned(
+                                      left: 0.w,
+                                      bottom: 18.85.h,
+                                      child: Image.asset(Assets.lefthh,
+                                          height: 4.73.h, width: 14.73.w),
+                                    ),
+                                    Positioned(
+                                      right: 0.w,
+                                      bottom: 18.85.h,
+                                      child: Image.asset(Assets.righthh,
+                                          height: 4.73.h, width: 14.73.w),
+                                    ),
+                                    Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Text("\$$price",
+                                            style: w600_16.copyWith(
+                                                fontSize: 13.sp,
+                                                color: AppColor.white)))
+                                  ]);
+                                });
+                              }),
+                          25.verticalSpace,
+                          AppButton(
+                            'Purchase 10 Token',
+                            () {},
+                            buttonColor: true,
+                          )
+                        ],
+                      ).wrapPaddingHorizontal(16.w),
+                    );
                   },
                   child: Container(
                     padding:
@@ -224,3 +313,14 @@ class _TokensPageState extends State<TokensPage> {
     );
   }
 }
+         // Image.asset(Assets.tokens_image,
+                                    //     height: 99.h, width: 99.w),
+                                    // Positioned(
+                                    //     bottom: 20.h,
+                                    //     left: 25.w,
+                                    //     child: Text(
+                                    //       "$qty Token",
+                                    //       style: w600_16.copyWith(
+                                    //           fontSize: 11.sp,
+                                    //           color: AppColor.black),
+                                    //     ))

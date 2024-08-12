@@ -21,6 +21,17 @@ abstract class _AuthStoreBase with Store {
   @observable
   String selectedLanguageName = 'English';
   _AuthStoreBase();
+  @observable
+  ObservableSet<int> selectedTokens = ObservableSet<int>();
+
+  @action
+  void toggleSelection(int index) {
+    if (selectedTokens.contains(index)) {
+      selectedTokens.remove(index);
+    } else {
+      selectedTokens.add(index);
+    }
+  }
 
   @observable
   int currentIndex = 0;
