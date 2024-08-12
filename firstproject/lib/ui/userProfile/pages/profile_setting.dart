@@ -151,9 +151,7 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
           onTap: () {
             showModalBottomSheet(
                 context: context,
-                builder: (context) => Column(
-                      children: [],
-                    ));
+                builder: (context) => Column(children: [])); //TODO:gift purchase
           },
           child: Custome_Buttons(image: Assets.gift, title: 'My Gift'))
     ]).wrapPaddingHorizontal(16.w);

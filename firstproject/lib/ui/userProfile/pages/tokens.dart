@@ -16,7 +16,6 @@ class TokensPage extends StatefulWidget {
 }
 
 class _TokensPageState extends State<TokensPage> {
-  
   final List<TokenModel> giftData = [
     TokenModel(
         id: 'id#2563225',
@@ -87,12 +86,43 @@ class _TokensPageState extends State<TokensPage> {
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
-                    // showModalBottomSheet(
-                    //     context: context,
-                    //     showDragHandle: true,
-                    //     isDismissible: true,
-                    //     isScrollControlled: true,
-                    //     builder: (context) => GiftPage());
+                    showModalBottomSheet(
+                        context: context,
+                        showDragHandle: true,
+                        isScrollControlled: true,
+                        builder: (context) => Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                30.verticalSpace,
+                                Image.asset(Assets.coin,
+                                        height: 48.h, width: 48.w)
+                                    .wrapPaddingBottom(10.h),
+                                Text(
+                                  "Purchase Tokens",
+                                  softWrap: true,
+                                  style: w600_20.copyWith(
+                                      color: isDarkMode
+                                          ? AppColor.white
+                                          : Color(0xff0B1120)),
+                                ).wrapPaddingBottom(42.h),
+                                GridView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: 6,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      mainAxisSpacing: 30.w,
+                                      crossAxisSpacing: 28.h,
+                                    ),
+                                    itemBuilder: (context, index) {
+                                      return Image.asset(
+                                        Assets.tokens,
+                                        height: 99.h,
+                                        width: 99.w,
+                                      );
+                                    })
+                              ],
+                            ));
                   },
                   child: Container(
                     padding:

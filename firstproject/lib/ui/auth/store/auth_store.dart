@@ -18,7 +18,8 @@ abstract class _AuthStoreBase with Store {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   @observable
   String selectedLanguage = 'en';
-
+  @observable
+  String selectedLanguageName = 'English';
   _AuthStoreBase();
 
   @observable
@@ -40,6 +41,14 @@ abstract class _AuthStoreBase with Store {
 
   @observable
   ObservableSet<int> heartedPoets = ObservableSet<int>();
+  @observable
+  int selectedValue = 0;
+
+  @action
+  void selectRadio(int value) {
+    selectedValue = value;
+  }
+
   @action
   void toggleCurrentPasswordVisibility() {
     isCurrentPasswordVisible = !isCurrentPasswordVisible;
@@ -61,8 +70,9 @@ abstract class _AuthStoreBase with Store {
   }
 
   @action
-  void changeLanguage(String language) {
-    selectedLanguage = language;
+  void changeLanguage(String languageCode, String languageName) {
+    selectedLanguage = languageCode;
+    selectedLanguageName = languageName;
   }
 
   @action

@@ -5,9 +5,12 @@ import 'package:flutter_demo_structure/generated/assets.dart';
 import 'package:flutter_demo_structure/router/app_router.dart';
 import 'package:flutter_demo_structure/values/export.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
+import 'package:flutter_demo_structure/widget/button_widget.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../main.dart';
+import '../../auth/store/auth_store.dart';
 
 @RoutePage()
 class SettingPage extends StatefulWidget {
@@ -19,11 +22,11 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   final Map<String, bool> _switchStates = {
-    'darkMode': false,
+    'darkMode': true,
     'privateProfile': false,
   };
   Map<String, String> data = {
-    Assets.block: "Block",
+    Assets.block: "Block User",
     Assets.key: "Change Password",
     Assets.change_lang: "Change Language",
   };
@@ -194,7 +197,9 @@ class _SettingPageState extends State<SettingPage> {
                       ListTile(
                         onTap: () {
                           print(index);
-                          if (index == 1) {
+                          if (index == 0) {
+                            locator<AppRouter>().push(BlockUserRoute());
+                          } else if (index == 1) {
                             locator<AppRouter>().push(ChangePasswordRoute());
                           } else if (index == 2) {
                             locator<AppRouter>().push(ChangeLanguageRoute());
@@ -204,11 +209,13 @@ class _SettingPageState extends State<SettingPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             if (index == 2)
-                              Text(
-                                "English",
-                                style: w500_14.copyWith(
-                                    fontSize: 16.sp, color: AppColor.blue),
-                              ),
+                              Observer(builder: (_) {
+                                return Text(
+                                  authStore.selectedLanguageName,
+                                  style: w500_14.copyWith(
+                                      fontSize: 16.sp, color: AppColor.blue),
+                                );
+                              }),
                             11.horizontalSpace,
                             Icon(
                               Icons.arrow_forward_ios,
@@ -249,7 +256,30 @@ class _SettingPageState extends State<SettingPage> {
                 return Column(
                   children: [
                     ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        switch (index) {
+                          case 2:
+                            locator<AppRouter>().push(FAQRoute());
+                            break;
+                          case 3:
+                            locator<AppRouter>().push(
+                                AboutUsRoute(title: 'Terms & Conditions'));
+                            break;
+                          case 4:
+                            locator<AppRouter>()
+                                .push(AboutUsRoute(title: 'Privacy Policy'));
+                            break;
+                          case 5:
+                            locator<AppRouter>()
+                                .push(AboutUsRoute(title: 'About Us'));
+                            break;
+                          case 6:
+                            locator<AppRouter>().push(ContactUsRoute());
+                            break;
+                          default:
+                            break;
+                        }
+                      },
                       title: Text(values,
                           style: w500_14.copyWith(
                               color: isDarkMode
@@ -286,7 +316,33 @@ class _SettingPageState extends State<SettingPage> {
                 return Column(
                   children: [
                     ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        switch (index) {
+                          case 0:
+                            showModalBottomSheet(
+                                context: context,
+                                showDragHandle: true,
+                                isScrollControlled: true,
+                                builder: (context) {
+                                  return deleteProfile(isDarkMode)
+                                      .wrapPaddingHorizontal(17.w);
+                                });
+                            break;
+                          case 1:
+                            showModalBottomSheet(
+                                context: context,
+                                showDragHandle: true,
+                                isScrollControlled: true,
+                                builder: (context) {
+                                  return logout(isDarkMode)
+                                      .wrapPaddingHorizontal(17.w);
+                                });
+                            break;
+
+                          default:
+                            break;
+                        }
+                      },
                       title: Text(values,
                           style: w500_14.copyWith(
                               color: isDarkMode
@@ -313,6 +369,107 @@ class _SettingPageState extends State<SettingPage> {
           ],
         ).wrapPaddingVertical(20.h),
       ),
+    );
+  }
+
+  Column logout(bool isDarkMode) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        10.verticalSpace,
+        Center(
+          child: Image.asset(
+            isDarkMode ? Assets.white_logo : Assets.dark_logo,
+            height: 51.h,
+            width: 110.w,
+          ),
+        ).wrapPaddingBottom(25.h),
+        Text(
+          textAlign: TextAlign.center,
+          "Are you sure want to delete profile from this App?",
+          style: w600_20.copyWith(
+              color: isDarkMode ? AppColor.white : AppColor.black),
+        ).wrapPaddingHorizontal(30.w),
+        20.verticalSpace,
+        AppButton('Yes, Logout', () {}, buttonColor: true),
+        AppButton('No, Thanks', () {}),
+      ],
+    );
+  }
+
+  Column deleteProfile(bool isDarkMode) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        10.verticalSpace,
+        Center(
+          child: Image.asset(
+            isDarkMode ? Assets.white_logo : Assets.dark_logo,
+            height: 51.h,
+            width: 110.w,
+          ),
+        ).wrapPaddingBottom(25.h),
+        Text(
+          textAlign: TextAlign.center,
+          "Are you sure want to delete profile from this App?",
+          style: w600_20.copyWith(
+              color: isDarkMode ? AppColor.white : AppColor.black),
+        ).wrapPaddingHorizontal(30.w),
+        20.verticalSpace,
+        Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(
+                width: 1.w,
+                color: AppColor.lightgrey.withOpacity(.20),
+              ),
+            ),
+            child: Observer(builder: (_) {
+              return Column(
+                  children: List.generate(3, (index) {
+                final titles = ["Waste of time", "Not Useful", "Other"];
+                final value = index + 1;
+                return RadioListTile(
+                    activeColor: AppColor.blue,
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: value,
+                    groupValue: authStore.selectedValue,
+                    onChanged: (int? val) {
+                      authStore.selectRadio(val ?? 0);
+                    },
+                    title: Text(
+                      titles[index],
+                      style: w500_14.copyWith(
+                          color: isDarkMode ? AppColor.white : AppColor.black),
+                    ));
+              }));
+            })).wrapPaddingBottom(10.h),
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 16.h),
+          decoration: BoxDecoration(
+              color: AppColor.red, borderRadius: BorderRadius.circular(8.r)),
+          child: Center(
+            child: Text(
+              "Yes, Delete",
+              style: w600_16.copyWith(fontSize: 14.sp, color: AppColor.white),
+            ),
+          ),
+        ).wrapPaddingBottom(5.h),
+        Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 16.h),
+                decoration: BoxDecoration(
+                    color: AppColor.transparent,
+                    borderRadius: BorderRadius.circular(8.r)),
+                child: Center(
+                    child: Text("No, Thanks",
+                        style: w600_16.copyWith(
+                            fontSize: 14.sp,
+                            color:
+                                isDarkMode ? AppColor.white : AppColor.black))))
+            .wrapPaddingBottom(5.h),
+      ],
     );
   }
 

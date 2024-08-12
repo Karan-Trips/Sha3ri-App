@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_demo_structure/ui/home/homepagemain.dart';
 import 'package:flutter_demo_structure/ui/home/pages/search.dart';
+import 'package:flutter_demo_structure/ui/userProfile/pages/block_user.dart';
 import 'package:flutter_demo_structure/ui/userProfile/pages/go_live.dart';
 import 'package:flutter_demo_structure/ui/userProfile/pages/my_gifts.dart';
 import 'package:flutter_demo_structure/ui/welcome_page/welcome_page.dart';
@@ -24,6 +25,9 @@ import '../ui/userProfile/pages/follower.dart';
 import '../ui/userProfile/pages/setting.dart';
 import '../ui/userProfile/pages/tokens.dart';
 import '../ui/userProfile/user_profile.dart';
+import '../widget/about_us.dart';
+import '../widget/contact_us.dart';
+import '../widget/faq.dart';
 
 part 'app_router.gr.dart';
 
@@ -54,8 +58,12 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: NotificationRoute.page),
     AutoRoute(page: FollowerRoute.page),
     AutoRoute(page: SettingRoute.page),
+    AutoRoute(page: BlockUserRoute.page),
     AutoRoute(page: MyGiftRoute.page),
     AutoRoute(page: TokensRoute.page),
+    AutoRoute(page: AboutUsRoute.page),
+    AutoRoute(page: ContactUsRoute.page),
+    AutoRoute(page: FAQRoute.page),
     CustomRoute(
         initial: true,
         page: HomeRouteMain.page,
