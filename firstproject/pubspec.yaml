@@ -111,6 +111,7 @@ dependencies:
   camerawesome: ^2.0.1
   open_file: ^3.3.2
   flutter_intl: ^0.0.1
+  flutter_chat_bubble: ^2.0.2
 
 dev_dependencies:
   build_runner: ^2.4.11
