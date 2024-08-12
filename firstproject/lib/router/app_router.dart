@@ -64,6 +64,7 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: AboutUsRoute.page),
     AutoRoute(page: ContactUsRoute.page),
     AutoRoute(page: FAQRoute.page),
+    // AutoRoute(page: GiftRoute.page),
     CustomRoute(
         initial: true,
         page: HomeRouteMain.page,

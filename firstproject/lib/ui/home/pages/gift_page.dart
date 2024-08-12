@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_structure/generated/assets.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
@@ -7,10 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../values/export.dart';
 import 'stickers.dart';
 
+// @RoutePage()
 class GiftPage extends StatefulWidget {
-  const GiftPage({
-    super.key,
-  });
+  const GiftPage({super.key});
 
   @override
   State<GiftPage> createState() => _GiftPageState();
