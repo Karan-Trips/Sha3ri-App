@@ -26,7 +26,8 @@ class Stickers extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            right: 0.w,
+            right: -5.w,
+            top: -5.h,
             child: Checkbox(
               activeColor: AppColor.blue,
               checkColor: AppColor.white,
@@ -36,16 +37,14 @@ class Stickers extends StatelessWidget {
             ),
           ),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AppImage(
                 assets: item['asset'],
                 height: 70.h,
                 width: 80.w,
-              ).wrapPaddingBottom(9.h),
+              ).wrapPaddingBottom(5.h),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 7.w),
+                padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 7.w),
                 decoration: BoxDecoration(
                   color: Color(0xffE41717),
                   borderRadius: BorderRadius.circular(10.r),
@@ -67,7 +66,7 @@ class Stickers extends StatelessWidget {
                 ),
               )
             ],
-          ).wrapPaddingAll(16.r),
+          ).wrapPaddingAll(5.r),
         ],
       ),
     );

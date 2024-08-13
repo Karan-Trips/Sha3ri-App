@@ -323,27 +323,21 @@ class ProfilePage extends StatelessWidget {
                 mainAxisSpacing: 5.w,
                 crossAxisSpacing: 5.h),
             itemBuilder: (context, index) => Container(
-                  width: 118.w,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Image.asset(
-                        Assets.like2,
-                        height: 15.h,
-                        width: 15.w,
-                      ).wrapPaddingRight(2.w),
-                      Text(
-                        '12.5k',
-                        style: w500_14.copyWith(
-                            fontSize: 12.sp, color: AppColor.white),
-                      )
-                    ],
-                  ).wrapPaddingOnly(bottom: 10.h, left: 11.w),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.r),
-                      image: DecorationImage(
-                          fit: BoxFit.cover, image: AssetImage(Assets.gitar))),
-                )).wrapPaddingBottom(10.h),
+                // width: 118.w,
+                child:
+                    Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                  Image.asset(Assets.like2, height: 15.h, width: 15.w)
+                      .wrapPaddingRight(2.w),
+                  Text('12.5k',
+                      style: w500_14.copyWith(
+                          fontSize: 12.sp, color: AppColor.white))
+                ]).wrapPaddingOnly(bottom: 10.h, left: 11.w),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4.r),
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(Assets.gitar))))).wrapPaddingBottom(
+            10.h),
       ],
     ).wrapPaddingHorizontal(16.w);
   }

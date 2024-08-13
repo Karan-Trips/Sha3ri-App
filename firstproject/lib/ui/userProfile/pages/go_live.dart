@@ -6,7 +6,6 @@ import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
 import 'package:flutter_demo_structure/widget/button_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/locator/locator.dart';
 import '../../../router/app_router.dart';
 
 @RoutePage()

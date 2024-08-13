@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_structure/generated/assets.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
@@ -83,53 +82,49 @@ class _GiftPageState extends State<GiftPage> with TickerProviderStateMixin {
       mainAxisSize: MainAxisSize.min,
       children: [
         16.verticalSpace,
-        Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                keyboardType: TextInputType.name,
-                spellCheckConfiguration: SpellCheckConfiguration(),
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  contentPadding: EdgeInsets.zero,
-                  iconColor: AppColor.primaryColor,
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50.r),
-                    borderSide: BorderSide(
-                        width: 1.w, color: Color(0xff81929E).withOpacity(.20)),
-                  ),
-                  fillColor: AppColor.transparent,
-                  filled: true,
+        Row(children: [
+          Expanded(
+            child: TextFormField(
+              keyboardType: TextInputType.name,
+              spellCheckConfiguration: SpellCheckConfiguration(),
+              decoration: InputDecoration(
+                hintText: 'Search',
+                contentPadding: EdgeInsets.zero,
+                iconColor: AppColor.primaryColor,
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50.r),
+                  borderSide: BorderSide(
+                      width: 1.w, color: Color(0xff81929E).withOpacity(.20)),
                 ),
-              ).wrapPaddingRight(18.w),
-            ),
-            Container(
+                fillColor: AppColor.transparent,
+                filled: true,
+              ),
+            ).wrapPaddingRight(18.w),
+          ),
+          Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50.r),
                   border: Border.all(
                       width: .79, color: Color(0xff81929E).withOpacity(.20))),
               padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 7.w),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset(Assets.gift_small, height: 20.h, width: 20.w),
-                  Text(
-                    "40",
-                    style: w500_14.copyWith(
-                        color: isDarkMode ? AppColor.white : AppColor.black),
-                  ).wrapPaddingRight(14.w),
-                  Image.asset(Assets.coin, height: 20.h, width: 20.w),
-                  Text(
-                    "500",
-                    style: w500_14.copyWith(
-                        color: isDarkMode ? AppColor.white : AppColor.black),
-                  )
-                ],
-              ),
-            )
-          ],
-        ).wrapPaddingHorizontal(14.w),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset(Assets.gift_small, height: 20.h, width: 20.w),
+                    Text(
+                      "40",
+                      style: w500_14.copyWith(
+                          color: isDarkMode ? AppColor.white : AppColor.black),
+                    ).wrapPaddingRight(14.w),
+                    Image.asset(Assets.coin, height: 20.h, width: 20.w),
+                    Text(
+                      "500",
+                      style: w500_14.copyWith(
+                          color: isDarkMode ? AppColor.white : AppColor.black),
+                    )
+                  ]))
+        ]).wrapPaddingHorizontal(14.w),
         15.verticalSpace,
         Container(
           height: 32.h,
@@ -162,7 +157,8 @@ class _GiftPageState extends State<GiftPage> with TickerProviderStateMixin {
           ).wrapPaddingAll(3),
         ).wrapPaddingHorizontal(25.w),
         15.verticalSpace,
-        Expanded(
+        SizedBox(
+          height: 320.h,
           child: TabBarView(
             controller: _tabController,
             children: [
@@ -172,7 +168,7 @@ class _GiftPageState extends State<GiftPage> with TickerProviderStateMixin {
                   shrinkWrap: true,
                   itemCount: tabItems[tabIndex].length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisExtent: 142.h,
+                      mainAxisExtent: 120.h,
                       crossAxisCount: 3,
                       crossAxisSpacing: 10.h,
                       mainAxisSpacing: 10.h),

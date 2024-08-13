@@ -257,6 +257,7 @@ class _HomePageMainState extends State<HomePageMain>
                           context: context,
                           showDragHandle: true,
                           isDismissible: true,
+                          backgroundColor: Color(0xff020202).withOpacity(.77),
                           isScrollControlled: true,
                           builder: (context) => GiftPage());
                     },
