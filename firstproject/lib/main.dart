@@ -72,8 +72,10 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-ValueNotifier<ThemeMode> themeNotifier = ValueNotifier<ThemeMode>(ThemeMode.system);
+ValueNotifier<ThemeMode> themeNotifier =
+    ValueNotifier<ThemeMode>(ThemeMode.system);
 
 void switchThemeMode() {
-  themeNotifier.value = themeNotifier.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+  themeNotifier.value =
+      themeNotifier.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
 }

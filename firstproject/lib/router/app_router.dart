@@ -4,9 +4,11 @@ import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_demo_structure/ui/auth/login/widget/edit_user_profile.dart';
 import 'package:flutter_demo_structure/ui/home/homepagemain.dart';
 import 'package:flutter_demo_structure/ui/home/pages/search.dart';
+import 'package:flutter_demo_structure/ui/home/pages/subscription_mode.dart';
 import 'package:flutter_demo_structure/ui/userProfile/pages/block_user.dart';
 import 'package:flutter_demo_structure/ui/userProfile/pages/go_live.dart';
 import 'package:flutter_demo_structure/ui/userProfile/pages/my_gifts.dart';
+import 'package:flutter_demo_structure/ui/userProfile/pages/request_list.dart';
 import 'package:flutter_demo_structure/ui/welcome_page/welcome_page.dart';
 
 import '../ui/auth/login/ui/change_lanuage.dart';
@@ -65,7 +67,9 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: AboutUsRoute.page),
     AutoRoute(page: ContactUsRoute.page),
     AutoRoute(page: FAQRoute.page),
+    AutoRoute(page: RequestListRoute.page),
     AutoRoute(page: EditUserProfileRoute.page),
+    AutoRoute(page: SubscriptionRoute.page),
     CustomRoute(
         initial: true,
         page: HomeRouteMain.page,

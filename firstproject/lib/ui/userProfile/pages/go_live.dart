@@ -34,7 +34,7 @@ class _GoLivePageState extends State<GoLivePage> {
         centerTitle: true,
         actions: [
           GestureDetector(
-            onTap: () => locator<AppRouter>().push(LiveRoute()),
+            onTap: () => appRouter.push(SubscriptionRoute()),
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
@@ -82,7 +82,7 @@ class _GoLivePageState extends State<GoLivePage> {
                           ).wrapPaddingHorizontal(30.5.w),
                           20.verticalSpace,
                           AppButton(buttonColor: true, 'Join Request', () {
-                            locator<AppRouter>().popForced();
+                            appRouter.popForced();
                             showModalBottomSheet(
                                 showDragHandle: true,
                                 isScrollControlled: true,
@@ -113,7 +113,7 @@ class _GoLivePageState extends State<GoLivePage> {
                                       AppButton(
                                         'Ok',
                                         () {
-                                          locator<AppRouter>().popForced();
+                                          appRouter.popForced();
                                         },
                                         buttonColor: true,
                                       )

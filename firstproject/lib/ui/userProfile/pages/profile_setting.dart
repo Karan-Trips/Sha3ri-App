@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_demo_structure/router/app_router.dart';
 import 'package:flutter_demo_structure/values/export.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
@@ -15,7 +14,9 @@ class ProfileSettingPage extends StatefulWidget {
   State<ProfileSettingPage> createState() => _ProfileSettingPageState();
 }
 
-class _ProfileSettingPageState extends State<ProfileSettingPage> {
+class _ProfileSettingPageState extends State<ProfileSettingPage>
+   {
+
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -24,7 +25,9 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
             centerTitle: false,
             actions: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  appRouter.push(RequestListRoute());
+                },
                 child: Badge(
                   backgroundColor: AppColor.blue,
                   child: Image.asset(
@@ -37,7 +40,7 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
                 ).wrapPaddingRight(18.w),
               ),
               GestureDetector(
-                  onTap: () => locator<AppRouter>().push(SettingRoute()),
+                  onTap: () => appRouter.push(SettingRoute()),
                   child: Image.asset(Assets.setting,
                           height: 24.h,
                           width: 24.w,
@@ -106,12 +109,12 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
         children: [
           GestureDetector(
               onTap: () {
-                locator<AppRouter>().push(FollowerRoute(types: 0));
+                appRouter.push(FollowerRoute(types: 0));
               },
               child: _buildStatColumn(context, '3.2k', 'Following')),
           GestureDetector(
               onTap: () {
-                locator<AppRouter>().push(FollowerRoute(types: 1));
+                appRouter.push(FollowerRoute(types: 1));
               },
               child: _buildStatColumn(context, '2.5k', 'Followers')),
           GestureDetector(
@@ -141,7 +144,7 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       GestureDetector(
           onTap: () {
-            locator<AppRouter>().push(EditUserProfileRoute());
+            appRouter.push(EditUserProfileRoute());
           },
           child: Custome_Buttons(
               image: Assets.editIcon, title: 'Edit', bgColor: true)),
@@ -150,7 +153,7 @@ class _ProfileSettingPageState extends State<ProfileSettingPage> {
           child: Custome_Buttons(image: Assets.coin, title: 'Token')),
       GestureDetector(
           onTap: () {
-            locator<AppRouter>().push(MyGiftRoute());
+            appRouter.push(MyGiftRoute());
           },
           child: Custome_Buttons(image: Assets.gift, title: 'My Gift'))
     ]).wrapPaddingHorizontal(16.w);
