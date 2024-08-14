@@ -91,6 +91,7 @@ class AppTextField extends StatelessWidget {
       cursorColor: AppColor.primaryColor,
       enableInteractiveSelection: enableInteractiveSelection,
       readOnly: readOnly,
+    
       onTap: onTap,
       controller: controller,
       focusNode: focusNode,
@@ -106,15 +107,18 @@ class AppTextField extends StatelessWidget {
       textInputAction: keyboardAction,
       textCapitalization: textCapitalization,
       onChanged: onChanged,
+      
       onFieldSubmitted: (_) => submit(context),
       inputFormatters: inputFormatters,
       maxLength: maxLength,
-      // onTapOutside: (_) => FocusScope.of(context).unfocus(),
+      
+      onTapOutside: (_) => FocusScope.of(context).unfocus(),
       decoration: decoration ??
           InputDecoration(
             counterStyle: textMedium.copyWith(
               color: AppColor.accentColor.withOpacity(0.50),
             ),
+            
             counterText: "",
             filled: filled,
             prefixText: prefixText,

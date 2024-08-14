@@ -72,12 +72,12 @@ class _NotificationPageState extends State<NotificationPage> {
             IconThemeData(color: isDarkMode ? AppColor.white : AppColor.black),
       ),
       body: ListView.separated(
+        padding: EdgeInsets.only(top: 20.h),
         itemCount: notifications.length,
         separatorBuilder: (context, index) {
           return Divider(
             color: AppColor.lightgrey,
-            height: 1.h,
-          ).wrapPaddingVertical(7.h);
+          ).wrapPaddingVertical(2.h);
         },
         itemBuilder: (context, index) {
           return NotificationTile(

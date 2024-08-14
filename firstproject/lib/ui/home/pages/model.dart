@@ -1,6 +1,5 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_demo_structure/generated/assets.dart';
 import 'package:flutter_demo_structure/router/app_router.dart';
 import 'package:flutter_demo_structure/widget/model_sheet.dart';
@@ -13,35 +12,45 @@ import '../../../values/export.dart';
 import '../../../widget/side_buttons.dart';
 
 class VideoReel extends StatefulWidget {
+  const VideoReel({super.key, required this.videoUrls});
+  final videoUrls;
+
   @override
   _VideoReelState createState() => _VideoReelState();
 }
 
 class _VideoReelState extends State<VideoReel> {
-  final List<String> videoUrls = [
-    'assets/image/video.mp4',
-    'assets/image/main.mp4',
-    'assets/image/video.mp4'
-  ];
+  late int _currentIndex;
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Swiper(
       itemBuilder: (BuildContext context, int index) {
-        return ChewiePlayer(videoUrl: videoUrls[index]);
+        final mediaUrl = widget.videoUrls[index];
+        return ChewiePlayer(
+          videoUrl: mediaUrl,
+          index: index,
+        );
       },
-      itemCount: videoUrls.length,
+      itemCount: widget.videoUrls.length,
       containerHeight: MediaQuery.of(context).size.height,
       itemHeight: MediaQuery.of(context).size.height,
       scrollDirection: Axis.vertical,
+      loop: false,
     );
   }
 }
 
 class ChewiePlayer extends StatefulWidget {
   final String videoUrl;
+  final int index;
 
-  const ChewiePlayer({required this.videoUrl});
+  const ChewiePlayer({required this.videoUrl, required this.index});
 
   @override
   _ChewiePlayerState createState() => _ChewiePlayerState();
@@ -52,39 +61,44 @@ class _ChewiePlayerState extends State<ChewiePlayer> {
   ChewieController? _chewieController;
   bool isLiked = true;
   bool isloved = false;
+  bool isVideo = false;
 
-  @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.asset(widget.videoUrl)
-      ..addListener(() {
-        if (_videoPlayerController.value.hasError) {
-          print(
-              'Video Player Error: ${_videoPlayerController.value.errorDescription}');
-        }
-      })
-      ..initialize().then((_) {
-        if (mounted) {
-          setState(() {
-            _chewieController = ChewieController(
-              videoPlayerController: _videoPlayerController,
-              looping: true,
-              autoPlay: true,
-              aspectRatio: _videoPlayerController.value.aspectRatio,
-              showControls: false,
-              allowFullScreen: true,
-            );
-          });
-        }
-      }).catchError((error) {
-        print('Video Initialization Error: $error');
-      });
+    isVideo = widget.videoUrl.endsWith('.mp4');
+
+    if (isVideo) {
+      _videoPlayerController = VideoPlayerController.asset(widget.videoUrl)
+        ..addListener(() {
+          if (_videoPlayerController.value.hasError) {
+            print(
+                'Video Player Error: ${_videoPlayerController.value.errorDescription}');
+          }
+        })
+        ..initialize().then((_) {
+          if (mounted) {
+            setState(() {
+              _chewieController = ChewieController(
+                videoPlayerController: _videoPlayerController,
+                showControls: false,
+                looping: true,
+                autoPlay: true,
+                aspectRatio: _videoPlayerController.value.aspectRatio,
+              );
+            });
+          }
+        }).catchError((error) {
+          print('Video Initialization Error: $error');
+        });
+    }
   }
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
-    _chewieController?.dispose();
+    if (isVideo) {
+      _videoPlayerController.dispose();
+      _chewieController?.dispose();
+    }
     super.dispose();
   }
 
@@ -92,83 +106,15 @@ class _ChewiePlayerState extends State<ChewiePlayer> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: _chewieController != null &&
-                  _chewieController!.videoPlayerController.value.isInitialized
-              ? Chewie(controller: _chewieController!)
-              : Center(child: CircularProgressIndicator()),
-        ),
-        Positioned(
-          bottom: 20,
-          right: 20,
-          child: Column(
-            children: [
-              GestureDetector(
-                onTap: () {},
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isLiked = !isLiked;
-                    });
-                  },
-                  child: SideButtons(
-                          color: isLiked ? AppColor.blue : AppColor.white,
-                          image: isLiked ? Assets.like : Assets.like_black)
-                      .wrapPaddingBottom(5.h),
-                ),
-              ),
-              Text("12.5k",
-                      style: w500_14.copyWith(
-                          color: AppColor.white, fontSize: 12.sp))
-                  .wrapPaddingBottom(10.h),
-              GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    showDragHandle: true,
-                    builder: (_) => CommentSheet(),
-                  );
-                },
-                child:
-                    SideButtons(color: Color(0xff3BE9BC), image: Assets.comment)
-                        .wrapPaddingBottom(5.h),
-              ),
-              Text("12.5k",
-                      style: w500_14.copyWith(
-                          color: AppColor.white, fontSize: 12.sp))
-                  .wrapPaddingBottom(10.h),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isloved = !isloved;
-                  });
-                },
-                child: SideButtons(
-                        color: isloved ? AppColor.red : AppColor.white,
-                        image: Assets.heart)
-                    .wrapPaddingBottom(5.h),
-              ),
-              Text("12.5k",
-                      style: w500_14.copyWith(
-                          color: AppColor.white, fontSize: 12.sp))
-                  .wrapPaddingBottom(10.h),
-              GestureDetector(
-                onTap: () {},
-                child: SideButtons(color: AppColor.white, image: Assets.share)
-                    .wrapPaddingBottom(10.h),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: SideButtons(
-                        color: Color(0xffEDEDED).withOpacity(.47),
-                        image: Assets.more)
-                    .wrapPaddingBottom(10.h),
-              ),
-            ],
-          ),
-        ),
+        Positioned.fill(
+            child: isVideo
+                ? (_chewieController != null &&
+                        _chewieController!
+                            .videoPlayerController.value.isInitialized
+                    ? Chewie(controller: _chewieController!)
+                    : Center(child: CircularProgressIndicator()))
+                : Image.asset(widget.videoUrl, fit: BoxFit.cover)),
+        MediaOverlay(index: widget.index),
         Positioned(
           bottom: 30.h,
           left: 20.w,
@@ -178,13 +124,13 @@ class _ChewiePlayerState extends State<ChewiePlayer> {
             children: [
               Row(
                 children: [
-                  CircleAvatar(backgroundImage: AssetImage(Assets.cam_girl))
+                  CircleAvatar(backgroundImage: AssetImage(Assets.a1))
                       .wrapPaddingRight(9.w),
                   GestureDetector(
                     onTap: () {
-                      locator<AppRouter>().push(
+                      appRouter.push(
                         ProfileRoute(
-                          isPrivate: false,
+                          isPrivate: true,
                           username: 'stephanie',
                           bio:
                               'Crafting verses that paint emotions with words, weaving tales of heart and soul. Poetry is my voice, painting life\'s hues with rhythm and rhyme. Readmore',
@@ -243,6 +189,98 @@ class _ChewiePlayerState extends State<ChewiePlayer> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class MediaOverlay extends StatefulWidget {
+  final int index;
+  const MediaOverlay({super.key, required this.index});
+
+  @override
+  _MediaOverlayState createState() => _MediaOverlayState();
+}
+
+class _MediaOverlayState extends State<MediaOverlay> {
+  bool isLiked = true;
+  bool isloved = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 20,
+      right: 20,
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isLiked = !isLiked;
+              });
+            },
+            child: SideButtons(
+              onPressed: () {},
+              color: isLiked ? AppColor.blue : AppColor.white,
+              image: isLiked ? Assets.like : Assets.like_black,
+            ).wrapPaddingBottom(5.h),
+          ),
+          GestureDetector(
+            onTap: () {
+              print('Navigating to LikePostRoute with index: ${widget.index}');
+              appRouter.push(LikePostRoute());
+            },
+            child: Text("12.5k",
+                    style: w500_14.copyWith(
+                        color: AppColor.white, fontSize: 12.sp))
+                .wrapPaddingBottom(10.h),
+          ),
+          SideButtons(
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  showDragHandle: true,
+                  builder: (_) {
+                    return CommentSheet();
+                  });
+            },
+            color: Color(0xff3BE9BC),
+            image: Assets.comment,
+          ).wrapPaddingBottom(5.h),
+          Text("12.5k",
+                  style:
+                      w500_14.copyWith(color: AppColor.white, fontSize: 12.sp))
+              .wrapPaddingBottom(10.h),
+          SideButtons(
+            onPressed: () {
+              setState(() {
+                isloved = !isloved;
+              });
+            },
+            color: isloved ? AppColor.red : AppColor.white,
+            image: Assets.heart,
+          ).wrapPaddingBottom(5.h),
+          Text("12.5k",
+                  style:
+                      w500_14.copyWith(color: AppColor.white, fontSize: 12.sp))
+              .wrapPaddingBottom(10.h),
+          GestureDetector(
+            onTap: () {},
+            child: SideButtons(
+              onPressed: () {},
+              color: AppColor.white,
+              image: Assets.share,
+            ).wrapPaddingBottom(10.h),
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: SideButtons(
+              onPressed: () {},
+              color: Color(0xffEDEDED).withOpacity(.47),
+              image: Assets.more,
+            ).wrapPaddingBottom(10.h),
+          ),
+        ],
+      ),
     );
   }
 }

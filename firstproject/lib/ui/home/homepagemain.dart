@@ -337,7 +337,13 @@ class _HomePageMainState extends State<HomePageMain>
     return TabBarView(
       controller: _tabController,
       children: [
-        VideoReel(),
+        VideoReel(
+          videoUrls: [
+            'assets/image/video.mp4',
+            'assets/image/main.mp4',
+            'assets/image/video.mp4',
+          ],
+        ),
         _buildTopPoetsGrid(isDarkMode),
         Center(
           child: Text(

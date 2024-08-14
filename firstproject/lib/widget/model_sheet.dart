@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_structure/generated/assets.dart';
+import 'package:flutter_demo_structure/widget/commet_tiles.dart';
 import 'package:flutter_demo_structure/widget/side_buttons.dart';
-import 'package:flutter_demo_structure/values/export.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
-import 'package:flutter_demo_structure/widget/app_text_filed.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CommentSheet extends StatelessWidget {
+class CommentSheet extends StatefulWidget {
+  @override
+  _CommentSheetState createState() => _CommentSheetState();
+}
+
+class _CommentSheetState extends State<CommentSheet> {
   final List<Comment> comments = [
     Comment('Lisa Lindsey', 'Beautiful', '2d'),
     Comment('Annie Ogawa', 'very interesting', '2d'),
@@ -32,6 +36,23 @@ class CommentSheet extends StatelessWidget {
     ],
   };
 
+  final TextEditingController _textController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+
+  void _handleSubmit(String text) {
+    if (text.isNotEmpty) {
+      final newReply = Comment('Current User', text, 'Just now');
+      setState(() {
+        replies[comments.last]?.add(newReply);
+        _textController.clear();
+      });
+    }
+  }
+
+  void _focusOnTextField() {
+    FocusScope.of(context).requestFocus(_focusNode);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,14 +70,18 @@ class CommentSheet extends StatelessWidget {
               final comment = comments[index];
               return Column(
                 children: [
-                  CommentTile(comment: comment),
-                  if (replies.containsKey(comment))
-                    ...replies[comment]!
-                        .map((reply) => Padding(
-                              padding: EdgeInsets.only(left: 40.0),
-                              child: CommentTile(comment: reply),
-                            ))
-                        .toList(),
+                  CommentTile(
+                    comment: comment,
+                    onReplyPressed: () {
+                      _focusOnTextField(); // Focus on TextFormField when replying
+                    },
+                    replies: replies[comment] ?? [],
+                    onReplyAdded: (newReply) {
+                      setState(() {
+                        replies[comment]?.add(newReply);
+                      });
+                    },
+                  ),
                 ],
               );
             },
@@ -70,69 +95,32 @@ class CommentSheet extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: AppTextField(
-                  label: 'Write a message',
-                  prefixIcon: IconButton(
-                      onPressed: () {}, icon: Icon(Icons.attach_file_sharp)),
-                  hint: 'Write a message',
-                  keyboardAction: TextInputAction.send,
-                  contentPadding: EdgeInsets.only(left: 20.w),
+                child: TextFormField(
+                  controller: _textController,
+                  focusNode: _focusNode,
+                  decoration: InputDecoration(
+                    labelText: 'Write a message',
+                    prefixIcon: IconButton(
+                        onPressed: () {}, icon: Icon(Icons.attach_file_sharp)),
+                    hintText: 'Write a message',
+                    contentPadding: EdgeInsets.only(left: 20.w),
+                  ),
+                  textInputAction: TextInputAction.send,
+                  onFieldSubmitted: _handleSubmit,
                 ).wrapPaddingOnly(left: 15.w, right: 10.w),
               ),
-              SideButtons(color: Colors.blue, image: Assets.share_white)
-                  .wrapPaddingRight(15.w)
+              SideButtons(
+                color: Colors.blue,
+                image: Assets.share_white,
+                onPressed: () {
+                  final text = _textController.text;
+                  _handleSubmit(text);
+                },
+              ).wrapPaddingRight(15.w)
             ],
           ),
-        )
+        ),
       ],
-    );
-  }
-}
-
-class Comment {
-  final String author;
-  final String content;
-  final String time;
-
-  Comment(this.author, this.content, this.time);
-}
-
-class CommentTile extends StatelessWidget {
-  final Comment comment;
-
-  CommentTile({required this.comment});
-
-  @override
-  Widget build(BuildContext context) {
-    bool isDarkmode = Theme.of(context).brightness == Brightness.dark;
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: AssetImage(Assets.cmt_girl),
-      ),
-      title: Text(
-        comment.author,
-        style: w500_14.copyWith(
-            fontSize: 12.spMax,
-            color: isDarkmode ? AppColor.white : AppColor.black),
-      ),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(comment.content),
-          SizedBox(height: 5.h),
-          Row(
-            children: [
-              Text(comment.time,
-                  style: w500_14.copyWith(
-                      fontSize: 12.spMax, color: AppColor.lightgrey)),
-              SizedBox(width: 8),
-              Text('Reply',
-                  style: w500_14.copyWith(
-                      fontSize: 12.spMax, color: AppColor.blue)),
-            ],
-          ),
-        ],
-      ),
     );
   }
 }

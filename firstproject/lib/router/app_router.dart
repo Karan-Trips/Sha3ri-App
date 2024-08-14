@@ -5,6 +5,8 @@ import 'package:flutter_demo_structure/ui/auth/login/widget/edit_user_profile.da
 import 'package:flutter_demo_structure/ui/home/homepagemain.dart';
 import 'package:flutter_demo_structure/ui/home/pages/search.dart';
 import 'package:flutter_demo_structure/ui/home/pages/subscription_mode.dart';
+import 'package:flutter_demo_structure/ui/userProfile/createPost/like.dart';
+import 'package:flutter_demo_structure/ui/userProfile/createPost/post_view.dart';
 import 'package:flutter_demo_structure/ui/userProfile/pages/block_user.dart';
 import 'package:flutter_demo_structure/ui/userProfile/pages/go_live.dart';
 import 'package:flutter_demo_structure/ui/userProfile/pages/my_gifts.dart';
@@ -70,6 +72,8 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: RequestListRoute.page),
     AutoRoute(page: EditUserProfileRoute.page),
     AutoRoute(page: SubscriptionRoute.page),
+    AutoRoute(page: PostRoute.page),
+    AutoRoute(page: LikePostRoute.page),
     CustomRoute(
         initial: true,
         page: HomeRouteMain.page,
