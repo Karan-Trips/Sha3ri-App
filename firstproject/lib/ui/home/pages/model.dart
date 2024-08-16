@@ -2,6 +2,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_structure/generated/assets.dart';
 import 'package:flutter_demo_structure/router/app_router.dart';
+import 'package:flutter_demo_structure/widget/commetns%20.dart';
 import 'package:flutter_demo_structure/widget/model_sheet.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -237,11 +238,19 @@ class _MediaOverlayState extends State<MediaOverlay> {
           SideButtons(
             onPressed: () {
               showModalBottomSheet(
-                  context: context,
-                  showDragHandle: true,
-                  builder: (_) {
-                    return CommentSheet();
-                  });
+                context: context,
+                // isScrollControlled: true,
+                isDismissible: true,
+                showDragHandle: true,
+                builder: (_) {
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                    ),
+                    child: CommentSheet(),
+                  );
+                },
+              );
             },
             color: Color(0xff3BE9BC),
             image: Assets.comment,
