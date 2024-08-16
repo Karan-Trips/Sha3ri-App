@@ -113,6 +113,7 @@ dependencies:
   flutter_intl: ^0.0.1
   flutter_chat_bubble: ^2.0.2
   comment_tree: ^0.3.0
+  flutter_chat_ui: ^1.6.15
 
 dev_dependencies:
   build_runner: ^2.4.11

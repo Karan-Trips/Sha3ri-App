@@ -20,6 +20,7 @@ import '../ui/auth/login/ui/forget_Password/reset_password.dart';
 import '../ui/auth/sign_up/pages/profile_info.dart';
 import '../ui/auth/sign_up/pages/profile_type.dart';
 import '../ui/auth/sign_up/sign_up_page.dart';
+import '../ui/chat/ui/chat_details.dart';
 import '../ui/home/pages/notification.dart';
 import '../ui/nextScreen/welcome_screen.dart';
 import '../ui/userProfile/createPost/create_post.dart';
@@ -74,6 +75,7 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: SubscriptionRoute.page),
     AutoRoute(page: PostRoute.page),
     AutoRoute(page: LikePostRoute.page),
+    AutoRoute(page: ChatDetailsRoute.page),
     CustomRoute(
         initial: true,
         page: HomeRouteMain.page,

@@ -9,11 +9,13 @@ import 'package:flutter_demo_structure/generated/l10n.dart';
 import 'package:flutter_demo_structure/router/app_router.dart';
 import 'package:flutter_demo_structure/widget/custom_error_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'ui/Theme_mode/theme_mode.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
+  await initializeDateFormatting();
   await locator.isReady<AppDB>();
 
   /// Disable debugPrint logs in production

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_demo_structure/router/app_router.dart';
+import 'package:flutter_demo_structure/ui/chat/ui/chat_page.dart';
 import 'package:flutter_demo_structure/ui/home/pages/notification.dart';
 import 'package:flutter_demo_structure/ui/userProfile/pages/profile_setting.dart';
 import 'package:flutter_demo_structure/values/export.dart';
@@ -319,9 +320,7 @@ class _HomePageMainState extends State<HomePageMain>
           },
           children: [
             homePage(false),
-            Center(
-              child: Text("Comments"),
-            ),
+            ChatPage(),
             Center(
               child: Text(""),
             ),
