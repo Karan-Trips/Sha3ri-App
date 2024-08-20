@@ -38,7 +38,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
       appBar: AppBar(
           backgroundColor: isDarkMode ? Colors.black : Color(0xffF5F6F7),
           centerTitle: true,
-          title: Text("Create Post",
+          title: Text("Create Post", 
               style: isDarkMode
                   ? w600_16.copyWith(color: Colors.white)
                   : w600_16)),
