@@ -111,7 +111,7 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
                 top: BorderSide(width: .92.w, color: AppColor.lightgrey)),
           ),
           child: Row(
-            children: [
+            children: [ 
               Expanded(
                 child: TextFormField(
                     controller: _textController,

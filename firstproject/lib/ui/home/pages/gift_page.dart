@@ -89,6 +89,7 @@ class _GiftPageState extends State<GiftPage> with TickerProviderStateMixin {
               spellCheckConfiguration: SpellCheckConfiguration(),
               decoration: InputDecoration(
                 hintText: 'Search',
+                hintStyle: w400_14.copyWith(color: AppColor.lightgrey),
                 contentPadding: EdgeInsets.zero,
                 iconColor: AppColor.primaryColor,
                 prefixIcon: Icon(Icons.search),
@@ -111,17 +112,17 @@ class _GiftPageState extends State<GiftPage> with TickerProviderStateMixin {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(Assets.gift_small, height: 20.h, width: 20.w),
+                    Image.asset(Assets.gift_small, height: 20.h, width: 20.w)
+                        .wrapPaddingRight(3.w),
                     Text(
                       "40",
-                      style: w500_14.copyWith(
-                          color: isDarkMode ? AppColor.white : AppColor.black),
+                      style: w500_14.copyWith(color: AppColor.white),
                     ).wrapPaddingRight(14.w),
-                    Image.asset(Assets.coin, height: 20.h, width: 20.w),
+                    Image.asset(Assets.coin, height: 20.h, width: 20.w)
+                        .wrapPaddingRight(3.w),
                     Text(
                       "500",
-                      style: w500_14.copyWith(
-                          color: isDarkMode ? AppColor.white : AppColor.black),
+                      style: w500_14.copyWith(color: AppColor.white),
                     )
                   ]))
         ]).wrapPaddingHorizontal(14.w),

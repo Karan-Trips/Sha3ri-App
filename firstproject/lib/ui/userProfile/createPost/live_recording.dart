@@ -71,6 +71,8 @@ class _LivePageState extends State<LivePage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Expanded(
                         child: Text(
@@ -84,7 +86,7 @@ class _LivePageState extends State<LivePage> {
                         ),
                       ),
                       Container(
-                        width: 68.w,
+                        width: 50.w,
                         height: 122.h,
                         child: Stack(
                           children: [
@@ -261,17 +263,21 @@ class _LivePageState extends State<LivePage> {
         25.verticalSpace,
         Text(
           "Do you want to stop live?",
-          style: w600_20.copyWith(color: AppColor.white),
+          style: w600_20.copyWith(
+              color: isDarkmode ? AppColor.white : AppColor.black),
         ),
         20.verticalSpace,
         AppButton(
           'Yes',
           () {
-            locator<AppRouter>().maybePop();
+            locator<AppRouter>().popAndPush(HomeRouteMain());
           },
           buttonColor: true,
         ).wrapPaddingBottom(5.h),
-        AppButton('No,Thanks', () {}).wrapPaddingBottom(5.h),
+        AppButton(
+          'No,Thanks',
+          () {},
+        ).wrapPaddingBottom(5.h),
       ],
     );
   }

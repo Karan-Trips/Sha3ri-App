@@ -171,22 +171,23 @@ class _HomePageMainState extends State<HomePageMain>
                       },
                       items: [
                         BottomNavigationBarItem(
-                            activeIcon: Icon(FontAwesomeIcons.house),
-                            icon: Icon(
-                              FontAwesomeIcons.house,
-                              color:
-                                  isDarkMode ? AppColor.white : AppColor.black,
+                            activeIcon: Image.asset(
+                              Assets.active_home,
+                              height: 26.h,
+                              width: 26.w,
+                            ),
+                            icon: Image.asset(
+                              Assets.home,
+                              height: 26.h,
+                              width: 26.w,
                             ),
                             label: 'Home'),
                         BottomNavigationBarItem(
-                            activeIcon: Icon(
-                              FontAwesomeIcons.solidCommentDots,
-                            ),
-                            icon: Icon(
-                              FontAwesomeIcons.commentDots,
-                              color:
-                                  isDarkMode ? AppColor.white : AppColor.black,
-                            ),
+                            activeIcon: Icon(FontAwesomeIcons.solidCommentDots),
+                            icon: Icon(FontAwesomeIcons.commentDots,
+                                color: isDarkMode
+                                    ? AppColor.white
+                                    : AppColor.black),
                             label: 'Comments'),
                         BottomNavigationBarItem(
                             icon: GestureDetector(
@@ -203,20 +204,23 @@ class _HomePageMainState extends State<HomePageMain>
                             ),
                             label: ''),
                         BottomNavigationBarItem(
-                            activeIcon: Icon(FontAwesomeIcons.solidBell),
-                            icon: Icon(
-                              FontAwesomeIcons.bell,
-                              color:
-                                  isDarkMode ? AppColor.white : AppColor.black,
+                            activeIcon: Image.asset(
+                              Assets.active_bell,
+                              height: 26.h,
+                              width: 26.w,
+                            ),
+                            icon: Image.asset(
+                              Assets.bell,
+                              height: 26.h,
+                              width: 26.w,
                             ),
                             label: 'Notifications'),
                         BottomNavigationBarItem(
                             activeIcon: Icon(FontAwesomeIcons.solidCircleUser),
-                            icon: Icon(
-                              FontAwesomeIcons.circleUser,
-                              color:
-                                  isDarkMode ? AppColor.white : AppColor.black,
-                            ),
+                            icon: Icon(FontAwesomeIcons.circleUser,
+                                color: isDarkMode
+                                    ? AppColor.white
+                                    : AppColor.black),
                             label: 'Profile')
                       ])
                 ])),

@@ -104,7 +104,7 @@ class _MyGiftPageState extends State<MyGiftPage>
                   ],
                 ),
                 const Spacer(),
-                GestureDetector( 
+                GestureDetector(
                   onTap: () {
                     showModalBottomSheet(
                         context: context,
@@ -193,10 +193,7 @@ class _MyGiftPageState extends State<MyGiftPage>
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: [
-                purchased(isDarkMode),
-                sendGift(isDarkMode)
-              ],
+              children: [purchased(isDarkMode), sendGift(isDarkMode)],
             ),
           ),
         ],
@@ -206,51 +203,47 @@ class _MyGiftPageState extends State<MyGiftPage>
 
   ListView sendGift(bool isDarkMode) {
     return ListView.builder(
-                  itemCount: giftData.length,
-                  itemBuilder: (context, index) {
-                    final image = giftData[index].image;
-                    final date = giftData[index].date;
-                    final title = giftData[index].title;
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: Image.asset(
-                            image,
-                            height: 62.57.h,
-                          ),
-                          title: Text(
-                            title,
-                            style: w600_16.copyWith(
-                                fontSize: 14.sp,
-                                color: isDarkMode
-                                    ? AppColor.white
-                                    : AppColor.black),
-                          ),
-                          subtitle: RichText(
-                              text: TextSpan(children: [
-                            TextSpan(
-                                text: 'Sent to ',
-                                style: w500_14.copyWith(
-                                    fontSize: 12.sp,
-                                    color: AppColor.lightgrey)),
-                            TextSpan(
-                                text: 'Allen joie',
-                                style: w500_14.copyWith(
-                                    fontSize: 12.sp, color: AppColor.black))
-                          ])),
-                          trailing: Text(
-                            date,
-                            style: w500_14.copyWith(
-                              fontSize: 12.sp,
-                              color: AppColor.lightgrey,
-                            ),
-                          ),
-                        ),
-                        Divider().wrapPaddingSymmetric(
-                            horizontal: 16.w, vertical: 10.h)
-                      ],
-                    );
-                  });
+        itemCount: giftData.length,
+        itemBuilder: (context, index) {
+          final image = giftData[index].image;
+          final date = giftData[index].date;
+          final title = giftData[index].title;
+          return Column(
+            children: [
+              ListTile(
+                leading: Image.asset(
+                  image,
+                  height: 62.57.h,
+                ),
+                title: Text(
+                  title,
+                  style: w600_16.copyWith(
+                      fontSize: 14.sp,
+                      color: isDarkMode ? AppColor.white : AppColor.black),
+                ),
+                subtitle: RichText(
+                    text: TextSpan(children: [
+                  TextSpan(
+                      text: 'Sent to ',
+                      style: w500_14.copyWith(
+                          fontSize: 12.sp, color: AppColor.lightgrey)),
+                  TextSpan(
+                      text: 'Allen joie',
+                      style: w500_14.copyWith(
+                          fontSize: 12.sp, color: AppColor.black))
+                ])),
+                trailing: Text(
+                  date,
+                  style: w500_14.copyWith(
+                    fontSize: 12.sp,
+                    color: AppColor.lightgrey,
+                  ),
+                ),
+              ),
+              Divider().wrapPaddingSymmetric(horizontal: 16.w, vertical: 10.h)
+            ],
+          );
+        });
   }
 
   ListView purchased(bool isDarkMode) {

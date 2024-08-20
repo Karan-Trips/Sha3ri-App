@@ -4,7 +4,6 @@ import 'package:flutter_demo_structure/generated/assets.dart';
 import 'package:flutter_demo_structure/values/export.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../core/locator/locator.dart';
 import '../../../router/app_router.dart';
 
@@ -85,6 +84,8 @@ class _FollowerPageState extends State<FollowerPage> {
 
     return Scaffold(
       appBar: AppBar(
+        excludeHeaderSemantics: true,
+        forceMaterialTransparency: true,
         centerTitle: true,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(60.h),
@@ -176,7 +177,7 @@ class _FollowerPageState extends State<FollowerPage> {
             ),
           );
         },
-      ).wrapPaddingVertical(20.h),
+      ),
     );
   }
 }

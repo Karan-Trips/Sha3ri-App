@@ -81,7 +81,9 @@ class _ReportSheetState extends State<ReportSheet> {
                       borderSide:
                           BorderSide(width: 1, color: Color(0xffE7EBF0)))),
             ).wrapPaddingBottom(15.h),
-            AppButton('Submit', () {}, buttonColor: true)
+            AppButton('Submit', () {
+              Navigator.pop(context);
+            }, buttonColor: true)
           ],
         ),
       ),
@@ -89,6 +91,7 @@ class _ReportSheetState extends State<ReportSheet> {
   }
 
   Widget _buildRadioListTile(String value) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return RadioListTile<String>(
       activeColor: AppColor.blue,
       value: value,
@@ -103,7 +106,7 @@ class _ReportSheetState extends State<ReportSheet> {
         style: TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 14.sp,
-          color: Colors.white,
+          color: isDarkMode ? AppColor.white : AppColor.black,
         ),
       ),
     );

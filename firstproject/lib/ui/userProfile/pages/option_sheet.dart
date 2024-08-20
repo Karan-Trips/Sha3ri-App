@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_structure/generated/assets.dart';
 import 'package:flutter_demo_structure/values/extensions/widget_ext.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,13 +18,15 @@ class OptionSheet extends StatelessWidget {
       children: [
         20.verticalSpace,
         ListTile(
-          leading: Icon(Icons.person_add_disabled_rounded),
+          leading: Image.asset(Assets.block, height: 24.h, width: 24.w),
           title: Text(username, style: textBold),
           onTap: () => Navigator.pop(context),
         ),
-        Divider().wrapPaddingLeft(45.w),
+        Divider(
+          color: AppColor.lightgrey.withOpacity(.20),
+        ).wrapPaddingLeft(45.w),
         ListTile(
-          leading: Icon(Icons.report),
+          leading: Image.asset(Assets.report, height: 24.h, width: 24.w),
           title: Text(
             'Report $username',
             style: textBold,
