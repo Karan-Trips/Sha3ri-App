@@ -43,6 +43,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   ? w600_16.copyWith(color: Colors.white)
                   : w600_16)),
       body: SingleChildScrollView(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

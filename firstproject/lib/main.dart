@@ -58,6 +58,7 @@ class _MyAppState extends State<MyApp> {
         valueListenable: themeNotifier,
         builder: (context, themeMode, child) {
           return MaterialApp.router(
+            title: 'Sha3ri App',
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: themeMode,

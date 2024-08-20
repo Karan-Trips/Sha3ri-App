@@ -77,7 +77,7 @@ class _GiftPageState extends State<GiftPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -116,13 +116,15 @@ class _GiftPageState extends State<GiftPage> with TickerProviderStateMixin {
                         .wrapPaddingRight(3.w),
                     Text(
                       "40",
-                      style: w500_14.copyWith(color: AppColor.white),
+                      style: w500_14.copyWith(
+                          color: isDarkMode ? AppColor.white : AppColor.black),
                     ).wrapPaddingRight(14.w),
                     Image.asset(Assets.coin, height: 20.h, width: 20.w)
                         .wrapPaddingRight(3.w),
                     Text(
                       "500",
-                      style: w500_14.copyWith(color: AppColor.white),
+                      style: w500_14.copyWith(
+                          color: isDarkMode ? AppColor.white : AppColor.black),
                     )
                   ]))
         ]).wrapPaddingHorizontal(14.w),
@@ -216,9 +218,8 @@ class _GiftPageState extends State<GiftPage> with TickerProviderStateMixin {
             ],
           ).wrapPaddingAll(3),
         ).wrapPaddingHorizontal(25.w),
-        15.verticalSpace,
         AppButton('Purchase', () {}, buttonColor: true)
-            .wrapPaddingHorizontal(17.w)
+            .wrapPaddingSymmetric(horizontal: 17.w, vertical: 10.h),
       ],
     );
   }

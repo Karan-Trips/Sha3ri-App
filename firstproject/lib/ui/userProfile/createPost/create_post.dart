@@ -49,6 +49,9 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
+      setState(() {
+        _photoPath = image.path;
+      });
       print('Image picked: ${image.path}');
     }
   }
@@ -60,7 +63,7 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
         body: Stack(
           children: [
             Positioned.fill(
-              child: TabBarView( 
+              child: TabBarView(
                 controller: _tabController,
                 children: [
                   CameraAwesomeBuilder.awesome(
@@ -68,13 +71,9 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
                         bottomActionsBackgroundColor: AppColor.transparent),
                     middleContentBuilder: (state) {
                       return _photoPath != null
-                          ? AspectRatio(
-                              aspectRatio: 
-                                  MediaQuery.of(context).size.aspectRatio,
-                              child: Image.file(
-                                File(_photoPath!),
-                                fit: BoxFit.cover,
-                              ),
+                          ? Image.file(
+                              File(_photoPath!),
+                              fit: BoxFit.contain,
                             )
                           : SizedBox.shrink();
                     },
@@ -115,7 +114,6 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
                         final Directory testDir =
                             Directory('${extDir.path}/camerawesome');
 
-                        // Create directory if it doesn't exist
                         if (!await testDir.exists()) {
                           await testDir.create(recursive: true);
                         }
@@ -125,7 +123,7 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
                           final String filePath = '${testDir.path}/$fileName';
 
                           print(
-                              "----------===========Saving photo to: $filePath----------===========");
+                              "----------============File Path: $filePath----------===========");
 
                           final SingleCaptureRequest captureRequest =
                               SingleCaptureRequest(filePath, sensors.first);
@@ -251,6 +249,7 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
                             ).then((value) {
                               state.when(
                                 onVideoMode: (onVideo) {
+                                  print("recording ...");
                                   final captureState = onVideo.captureState;
                                   if (captureState != null) {
                                     if (captureState.isRecordingVideo) {
@@ -434,13 +433,12 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
                         ),
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(
-                          width: 1.w,
-                          color:
-                              isDarkMode ? Colors.white54 : Color(0xffE7EBF0),
-                        ),
-                      ),
+                          borderRadius: BorderRadius.circular(8.r),
+                          borderSide: BorderSide(
+                              width: 1.w,
+                              color: isDarkMode
+                                  ? Colors.white54
+                                  : Color(0xffE7EBF0))),
                       hintText: 'Write a Live Description',
                       hintStyle: w600_16.copyWith(
                           color: isDarkMode
@@ -448,8 +446,8 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
                               : AppColor.lightgrey)))
               .wrapPaddingVertical(10.h),
           AppButton('Start', () {
-            // locator<AppRouter>().popForced();
             locator<AppRouter>().push(LiveRoute());
+            locator<AppRouter>().maybePop();
           }, buttonColor: true),
           AppButton('Cancel', () {}, buttonColor: false),
         ]);

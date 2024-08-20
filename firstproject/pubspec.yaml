@@ -180,18 +180,27 @@ flutter:
 
 flutter_intl:
   enabled: true
+# flutter_native_splash:
+#   image: assets/image/logo_splash.png
+#   background_image: assets/image/splash_back.png
+#   android: true
+#   ios: true
+#   fullscreen: true
+#   android_gravity: center
+#   ios_content_mode: center
+# android_12:
+#   image:c
+#   background_image: assets/image/splash_back.png
+#   android_gravity: center
+#   ios_content_mode: center
 flutter_native_splash:
+
+  background_image: "assets/image/logo_splash.png"
+
   image: assets/image/logo_splash.png
-  background_image: assets/image/splash.jpg
-  color: "#ffffff"
-  android: true
-  ios: true
-  fullscreen: true
-  android_gravity: center
-  ios_content_mode: center
-  android_12:
-    image: assets/image/logo_splash.png
-    background_image: assets/image/splash.jpg
-    android_gravity: center
-    ios_content_mode: center
-  
+
+android_12:
+
+image: assets/image/logo_splash.png
+
+image_dark: assets/image/splash_back.png

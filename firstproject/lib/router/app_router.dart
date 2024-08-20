@@ -44,7 +44,7 @@ class AppRouter extends _$AppRouter {
 
   @override
   final List<AutoRoute> routes = [
-    AutoRoute(page: WelcomeRoute.page, initial: true),
+    AutoRoute(page: WelcomeRoute.page),
     AutoRoute(page: NextScreenRoute.page),
     AutoRoute(page: ResetPasswordRoute.page),
     AutoRoute(page: ResetPasswordScreenRoute.page),
@@ -76,6 +76,7 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: ChatDetailsRoute.page),
     CustomRoute(
         page: HomeRouteMain.page,
+        initial: true,
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 1000),
   ];
