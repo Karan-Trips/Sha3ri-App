@@ -37,7 +37,7 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(MyApp(appRouter: locator<AppRouter>()));
+  runApp(MyApp(appRouter: appRouter));
 }
 
 class MyApp extends StatefulWidget {
@@ -58,17 +58,15 @@ class _MyAppState extends State<MyApp> {
         valueListenable: themeNotifier,
         builder: (context, themeMode, child) {
           return MaterialApp.router(
-            title: 'Sha3ri App',
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            themeMode: themeMode,
-            debugShowCheckedModeBanner: false,
-            routerDelegate: widget.appRouter.delegate(),
-            routeInformationParser: widget.appRouter.defaultRouteParser(),
-            onGenerateTitle: (context) => S.of(context).applicationTitle,
-            localizationsDelegates: const [S.delegate],
-            supportedLocales: S.delegate.supportedLocales,
-          );
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              themeMode: themeMode,
+              debugShowCheckedModeBanner: false,
+              routerDelegate: widget.appRouter.delegate(),
+              routeInformationParser: widget.appRouter.defaultRouteParser(),
+              onGenerateTitle: (context) => S.of(context).applicationTitle,
+              localizationsDelegates: const [S.delegate],
+              supportedLocales: S.delegate.supportedLocales);
         },
       ),
     );

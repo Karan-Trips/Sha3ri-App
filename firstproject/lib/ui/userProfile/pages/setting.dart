@@ -56,7 +56,7 @@ class _SettingPageState extends State<SettingPage> {
                 Row(
                   children: [
                     GestureDetector(
-                      onTap: () => locator<AppRouter>().push(MyGiftRoute()),
+                      onTap: () => appRouter.push(MyGiftRoute()),
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             vertical: 5.h, horizontal: 15.w),
@@ -97,7 +97,7 @@ class _SettingPageState extends State<SettingPage> {
                       ).wrapPaddingRight(15.w),
                     ),
                     GestureDetector(
-                      onTap: () => locator<AppRouter>().push(TokensRoute()),
+                      onTap: () => appRouter.push(TokensRoute()),
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 5.h),
                         decoration: BoxDecoration(
@@ -139,9 +139,9 @@ class _SettingPageState extends State<SettingPage> {
                   ],
                 ),
                 15.verticalSpace,
-                GestureDetector(onTap: ()=>appRouter.push(SubscriptionRoute()),
+                GestureDetector(
+                  onTap: () => appRouter.push(SubscriptionRoute()),
                   child: boxContainer(
-                    
                     sufixIcon: true,
                     count: 'Subscribe to Premium',
                     image: Assets.prime,
@@ -201,11 +201,11 @@ class _SettingPageState extends State<SettingPage> {
                         onTap: () {
                           print(index);
                           if (index == 0) {
-                            locator<AppRouter>().push(BlockUserRoute());
+                            appRouter.push(BlockUserRoute());
                           } else if (index == 1) {
-                            locator<AppRouter>().push(ChangePasswordRoute());
+                            appRouter.push(ChangePasswordRoute());
                           } else if (index == 2) {
-                            locator<AppRouter>().push(ChangeLanguageRoute());
+                            appRouter.push(ChangeLanguageRoute());
                           }
                         },
                         trailing: Row(
@@ -262,22 +262,21 @@ class _SettingPageState extends State<SettingPage> {
                       onTap: () {
                         switch (index) {
                           case 2:
-                            locator<AppRouter>().push(FAQRoute());
+                            appRouter.push(FAQRoute());
                             break;
                           case 3:
-                            locator<AppRouter>().push(
+                            appRouter.push(
                                 AboutUsRoute(title: 'Terms & Conditions'));
                             break;
                           case 4:
-                            locator<AppRouter>()
+                            appRouter
                                 .push(AboutUsRoute(title: 'Privacy Policy'));
                             break;
                           case 5:
-                            locator<AppRouter>()
-                                .push(AboutUsRoute(title: 'About Us'));
+                            appRouter.push(AboutUsRoute(title: 'About Us'));
                             break;
                           case 6:
-                            locator<AppRouter>().push(ContactUsRoute());
+                            appRouter.push(ContactUsRoute());
                             break;
                           default:
                             break;

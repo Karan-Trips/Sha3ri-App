@@ -27,7 +27,7 @@ class ChatmainPage extends StatelessWidget {
       children: [
         ListTile(
           onTap: () {
-            locator<AppRouter>().push(ChatDetailsRoute(
+            appRouter.push(ChatDetailsRoute(
               chatId: index,
               chatName: name,
               chatImage: image,

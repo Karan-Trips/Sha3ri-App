@@ -270,7 +270,7 @@ class _LivePageState extends State<LivePage> {
         AppButton(
           'Yes',
           () {
-            locator<AppRouter>().popAndPush(HomeRouteMain());
+            appRouter.popAndPush(HomeRouteMain());
           },
           buttonColor: true,
         ).wrapPaddingBottom(5.h),

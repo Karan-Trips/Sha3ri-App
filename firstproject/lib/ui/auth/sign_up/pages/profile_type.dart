@@ -134,7 +134,7 @@ class _ProfileTypePageState extends State<ProfileTypePage> {
                         ).wrapPaddingHorizontal(46.5.w).wrapPaddingBottom(25.h),
                         AppButton(
                           'Explore the App',
-                          () => locator<AppRouter>().pushAndPopUntil(
+                          () => appRouter.pushAndPopUntil(
                             HomeRouteMain(),
                             predicate: (route) => false,
                           ),

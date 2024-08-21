@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../core/locator/locator.dart';
 import '../generated/l10n.dart';
 import '../router/app_router.dart';
 import '../values/colors.dart';
 import '../values/style.dart';
-
-///This class will use for taking image and video from camera and galley.
 
 class MediaPickerSheet extends StatelessWidget {
   const MediaPickerSheet({
@@ -28,7 +24,7 @@ class MediaPickerSheet extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              locator<AppRouter>().maybePop();
+              appRouter.maybePop();
               selectMedia(
                 sourceType: SourceType.camera,
                 pickFileType: pickFileType,
@@ -43,7 +39,7 @@ class MediaPickerSheet extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              locator<AppRouter>().maybePop();
+              appRouter.maybePop();
               selectMedia(
                 sourceType: SourceType.gallery,
                 pickFileType: pickFileType,
@@ -58,7 +54,7 @@ class MediaPickerSheet extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           GestureDetector(
-            onTap: () => locator<AppRouter>().maybePop(),
+            onTap: () => appRouter.maybePop(),
             child: Padding(
               padding: const EdgeInsets.only(
                 left: 30,

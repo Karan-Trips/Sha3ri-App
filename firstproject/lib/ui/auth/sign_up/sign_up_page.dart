@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_demo_structure/generated/assets.dart';
 import 'package:flutter_demo_structure/router/app_router.dart';
 import 'package:flutter_demo_structure/values/export.dart';
@@ -121,7 +120,7 @@ class _CompelteProfilePageState extends State<CompelteProfilePage> {
           Spacer(),
           AppButton(
             'Next',
-            () => locator<AppRouter>().push(ProfileInfoRoute()),
+            () => appRouter.push(ProfileInfoRoute()),
             buttonColor: true,
           ).wrapPaddingHorizontal(16.w).wrapPaddingBottom(20.h)
         ],

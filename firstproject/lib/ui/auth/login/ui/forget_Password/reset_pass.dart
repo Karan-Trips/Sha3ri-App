@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo_structure/core/locator/locator.dart';
 import 'package:flutter_demo_structure/generated/assets.dart';
 import 'package:flutter_demo_structure/router/app_router.dart';
 import 'package:flutter_demo_structure/values/export.dart';
@@ -124,7 +123,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   AppButton(
                     buttonColor: true,
                     'Back To login',
-                    () => locator<AppRouter>().popUntilRoot(),
+                    () => appRouter.popUntilRoot(),
                   ).wrapPaddingOnly(bottom: 10.h, left: 16.w, right: 16.w)
                 ],
               ),

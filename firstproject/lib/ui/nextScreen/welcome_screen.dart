@@ -261,8 +261,8 @@ class _NextScreenPageState extends State<NextScreenPage>
             AppButton(
               'Next',
               () {
-                locator<AppRouter>()
-                    .pushAndPopUntil(WelcomeRoute(), predicate: (_) => false);
+                appRouter.pushAndPopUntil(WelcomeRoute(),
+                    predicate: (_) => false);
               },
               buttonColor: true,
             ).wrapPaddingSymmetric(horizontal: 15.w, vertical: 18.h)

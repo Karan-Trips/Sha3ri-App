@@ -117,7 +117,7 @@ class _FollowerPageState extends State<FollowerPage> {
 
           return ListTile(
             onTap: () {
-              locator<AppRouter>().push(
+              appRouter.push(
                 ProfileRoute(
                   isPrivate: false,
                   username: follower['name'],

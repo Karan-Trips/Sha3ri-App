@@ -103,7 +103,7 @@ class _PostEditPageState extends State<PostEditPage>
               alignment: Alignment.bottomCenter,
               child: AppButton(
                       'Next',
-                      () => locator<AppRouter>()
+                      () => appRouter
                           .push(CreatePostRoute(image: widget.photoPath)),
                       buttonColor: true)
                   .wrapPaddingAll(17.r),

@@ -181,7 +181,7 @@ class _LoginBottomSheetState extends State<LoginBottomSheet> {
               ),
             ),
             AppButton(buttonColor: true, 'Login', () {
-              locator<AppRouter>().pushAndPopUntil(HomeRouteMain(),
+              appRouter.pushAndPopUntil(HomeRouteMain(),
                   predicate: (route) => false);
             }),
             SizedBox(height: 20),

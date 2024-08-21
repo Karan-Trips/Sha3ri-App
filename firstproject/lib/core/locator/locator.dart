@@ -22,7 +22,7 @@ Future<void> setupLocator() async {
   locator.registerSingletonAsync<AppDB>(() => AppDB.getInstance());
 
   /// setup navigator instance
-  locator.registerSingleton(AppRouter());
+  locator.registerSingleton(appRouter);
 
   /// setup API modules with repos which requires [Dio] instance
   await ApiModule().provides();

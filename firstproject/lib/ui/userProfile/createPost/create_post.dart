@@ -85,7 +85,7 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           GestureDetector(
-                            onTap: () => locator<AppRouter>().popForced(),
+                            onTap: () => appRouter.popForced(),
                             child: Container(
                               margin: EdgeInsets.all(5.w),
                               decoration: BoxDecoration(
@@ -94,7 +94,7 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
                               ),
                               child: IconButton(
                                 onPressed: () {
-                                  locator<AppRouter>().maybePop();
+                                  appRouter.maybePop();
                                 },
                                 icon: Image.asset(
                                   Assets.close,
@@ -212,7 +212,7 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
                         right: GestureDetector(
                           onTap: () {
                             if (_photoPath != null) {
-                              locator<AppRouter>()
+                              appRouter
                                   .push(PostEditRoute(photoPath: _photoPath!));
                             }
                           },
@@ -446,8 +446,8 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
                               : AppColor.lightgrey)))
               .wrapPaddingVertical(10.h),
           AppButton('Start', () {
-            locator<AppRouter>().push(LiveRoute());
-            locator<AppRouter>().maybePop();
+            appRouter.push(LiveRoute());
+            appRouter.maybePop();
           }, buttonColor: true),
           AppButton('Cancel', () {}, buttonColor: false),
         ]);

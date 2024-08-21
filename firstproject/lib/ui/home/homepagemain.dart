@@ -191,8 +191,7 @@ class _HomePageMainState extends State<HomePageMain>
                             label: 'Comments'),
                         BottomNavigationBarItem(
                             icon: GestureDetector(
-                              onTap: () =>
-                                  locator<AppRouter>().push(CameraRoute()),
+                              onTap: () => appRouter.push(CameraRoute()),
                               child: Container(
                                   width: 48.h,
                                   height: 48.w,
@@ -296,7 +295,7 @@ class _HomePageMainState extends State<HomePageMain>
                   ),
                   GestureDetector(
                     onTap: () {
-                      locator<AppRouter>().push(GoLiveRoute());
+                      appRouter.push(GoLiveRoute());
                     },
                     child: Container(
                             child: AppImage(
@@ -316,7 +315,7 @@ class _HomePageMainState extends State<HomePageMain>
                           DecorationImage(image: AssetImage(Assets.profile))),
                 ).wrapPaddingLeft(16.w),
                 title: GestureDetector(
-                  onTap: () => locator<AppRouter>().push(SearchRoute()),
+                  onTap: () => appRouter.push(SearchRoute()),
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50.r),
